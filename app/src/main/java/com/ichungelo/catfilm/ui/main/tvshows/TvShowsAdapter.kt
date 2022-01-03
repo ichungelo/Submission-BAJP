@@ -1,11 +1,13 @@
 package com.ichungelo.catfilm.ui.main.tvshows
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ichungelo.catfilm.databinding.ItemsPosterBinding
 import com.ichungelo.catfilm.model.DataEntity
+import com.ichungelo.catfilm.ui.detail.DetailActivity
 
 class TvShowsAdapter: RecyclerView.Adapter<TvShowsAdapter.TvShowsViewHolder>() {
     private val listTvShows = ArrayList<DataEntity>()
@@ -15,6 +17,7 @@ class TvShowsAdapter: RecyclerView.Adapter<TvShowsAdapter.TvShowsViewHolder>() {
         this.listTvShows.clear()
         this.listTvShows.addAll(tvShows)
     }
+
     class TvShowsViewHolder(private val binding: ItemsPosterBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(tvShow: DataEntity) {
             with(binding) {
@@ -22,6 +25,11 @@ class TvShowsAdapter: RecyclerView.Adapter<TvShowsAdapter.TvShowsViewHolder>() {
                 Glide.with(itemView.context)
                     .load(tvShow.poster)
                     .into(imgPoster)
+                itemView.setOnClickListener {
+                    val intent = Intent(itemView.context, DetailActivity::class.java)
+                    intent.putExtra(DetailActivity.EXTRA_DATA, tvShow.dataId)
+                    itemView.context.startActivity(intent)
+                }
             }
         }
     }
