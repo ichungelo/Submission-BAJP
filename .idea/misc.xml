@@ -5,16 +5,18 @@
       <map>
         <entry key="..\:/Dicoding/BAJP/Submission/catfilm/app/src/main/res/drawable/bg_toolbar.xml" value="0.22552083333333334" />
         <entry key="..\:/Dicoding/BAJP/Submission/catfilm/app/src/main/res/drawable/ic_cat_film.xml" value="0.22552083333333334" />
+        <entry key="..\:/Dicoding/BAJP/Submission/catfilm/app/src/main/res/drawable/ic_chevron_left.xml" value="0.22205128205128205" />
         <entry key="..\:/Dicoding/BAJP/Submission/catfilm/app/src/main/res/drawable/ic_device_tv.xml" value="0.22552083333333334" />
         <entry key="..\:/Dicoding/BAJP/Submission/catfilm/app/src/main/res/drawable/ic_movie.xml" value="0.22552083333333334" />
         <entry key="..\:/Dicoding/BAJP/Submission/catfilm/app/src/main/res/drawable/ic_play.xml" value="0.22552083333333334" />
         <entry key="..\:/Dicoding/BAJP/Submission/catfilm/app/src/main/res/drawable/ic_tab_indicator.xml" value="0.22552083333333334" />
-        <entry key="..\:/Dicoding/BAJP/Submission/catfilm/app/src/main/res/layout/activity_detail.xml" value="0.209375" />
+        <entry key="..\:/Dicoding/BAJP/Submission/catfilm/app/src/main/res/layout/activity_detail.xml" value="0.33" />
         <entry key="..\:/Dicoding/BAJP/Submission/catfilm/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Dicoding/BAJP/Submission/catfilm/app/src/main/res/layout/fragment_movies.xml" value="0.25" />
         <entry key="..\:/Dicoding/BAJP/Submission/catfilm/app/src/main/res/layout/fragment_tv_shows.xml" value="0.209375" />
         <entry key="..\:/Dicoding/BAJP/Submission/catfilm/app/src/main/res/layout/items_movies.xml" value="0.33" />
         <entry key="..\:/Dicoding/BAJP/Submission/catfilm/app/src/main/res/layout/items_poster.xml" value="0.209375" />
+        <entry key="..\:/Dicoding/BAJP/Submission/catfilm/app/src/main/res/layout/tab_layout.xml" value="1.25" />
       </map>
     </option>
   </component>
