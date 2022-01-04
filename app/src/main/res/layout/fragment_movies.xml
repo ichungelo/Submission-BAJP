@@ -14,10 +14,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:drawablePadding="10dp"
+        android:fontFamily="@font/ubuntu_medium"
         android:text="@string/movie_list"
         android:textColor="@color/text_main"
         android:textSize="24sp"
-        android:textStyle="bold"
         app:drawableStartCompat="@drawable/ic_play"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +31,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_movie_list"
-        tools:listitem="@layout/items_poster"/>
+        tools:listitem="@layout/items_poster" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

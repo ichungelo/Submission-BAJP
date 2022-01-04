@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.ichungelo.catfilm.ui.main.movies.MoviesFragment
 import com.ichungelo.catfilm.ui.main.tvshows.TvShowsFragment
 
-class SectionPagerAdapter(activity: AppCompatActivity): FragmentStateAdapter(activity) {
+class SectionPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {

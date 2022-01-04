@@ -9,7 +9,7 @@ import com.ichungelo.catfilm.databinding.ItemsPosterBinding
 import com.ichungelo.catfilm.model.DataEntity
 import com.ichungelo.catfilm.ui.detail.DetailActivity
 
-class TvShowsAdapter: RecyclerView.Adapter<TvShowsAdapter.TvShowsViewHolder>() {
+class TvShowsAdapter : RecyclerView.Adapter<TvShowsAdapter.TvShowsViewHolder>() {
     private val listTvShows = ArrayList<DataEntity>()
 
     fun setTvShows(tvShows: List<DataEntity>?) {
@@ -18,7 +18,8 @@ class TvShowsAdapter: RecyclerView.Adapter<TvShowsAdapter.TvShowsViewHolder>() {
         this.listTvShows.addAll(tvShows)
     }
 
-    class TvShowsViewHolder(private val binding: ItemsPosterBinding): RecyclerView.ViewHolder(binding.root) {
+    class TvShowsViewHolder(private val binding: ItemsPosterBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(tvShow: DataEntity) {
             with(binding) {
                 tvTitlePoster.text = tvShow.title
@@ -40,7 +41,7 @@ class TvShowsAdapter: RecyclerView.Adapter<TvShowsAdapter.TvShowsViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: TvShowsViewHolder, position: Int) {
-        val tvShow =listTvShows[position]
+        val tvShow = listTvShows[position]
         holder.bind(tvShow)
     }
 
