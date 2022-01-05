@@ -14,7 +14,11 @@ import org.junit.Test
 
 class MainActivityTest {
     private val dataMovies = Data.generateDataMovies()
+    private val movieLastIndex = dataMovies.lastIndex
+    private val selectedMovies = dataMovies[movieLastIndex]
     private val dataTvShows = Data.generateDataTvShows()
+    private val tvShowLastIndex = dataTvShows.lastIndex
+    private val selectedTvShow = dataTvShows[tvShowLastIndex]
 
     @get:Rule
     var activityRule = ActivityScenarioRule(MainActivity::class.java)
@@ -22,33 +26,35 @@ class MainActivityTest {
     @Test
     fun loadMovies() {
         onView(withId(R.id.rv_movies)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dataMovies.size))
+        onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(movieLastIndex))
     }
 
     @Test
     fun loadTvShows() {
         onView(withId(R.id.rv_movies)).perform(swipeLeft())
         onView(withId(R.id.rv_tv_shows)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_tv_shows)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(dataTvShows.size))
+        onView(withId(R.id.rv_tv_shows)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(tvShowLastIndex))
+
     }
 
     @Test
     fun loadDetailMovie() {
-        onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+        onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(movieLastIndex))
+        onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(movieLastIndex, click()))
         onView(withId(R.id.tv_detail_toolbar)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_detail_toolbar)).check(matches(withText(R.string.movies)))
         onView(withId(R.id.img_detail_poster)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_detail_title)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_detail_title)).check(matches(withText(dataMovies[0].title)))
+        onView(withId(R.id.tv_detail_title)).check(matches(withText(selectedMovies.title)))
         onView(withId(R.id.tv_detail_rating)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_detail_rating)).check(matches(withText(dataMovies[0].rating)))
+        onView(withId(R.id.tv_detail_rating)).check(matches(withText(selectedMovies.rating)))
         onView(withId(R.id.img_detail_poster)).perform(swipeUp())
         onView(withId(R.id.tv_detail_genre)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_detail_genre)).check(matches(withText(dataMovies[0].genre)))
+        onView(withId(R.id.tv_detail_genre)).check(matches(withText(selectedMovies.genre)))
         onView(withId(R.id.tv_detail_year)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_detail_year)).check(matches(withText(dataMovies[0].year.toString())))
+        onView(withId(R.id.tv_detail_year)).check(matches(withText(selectedMovies.year.toString())))
         onView(withId(R.id.tv_detail_overview)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_detail_overview)).check(matches(withText(dataMovies[0].overview)))
+        onView(withId(R.id.tv_detail_overview)).check(matches(withText(selectedMovies.overview)))
         onView(withId(R.id.btn_detail_back)).perform(click())
         onView(withId(R.id.rv_movies)).check(matches(isDisplayed()))
     }
@@ -56,28 +62,39 @@ class MainActivityTest {
     @Test
     fun loadDetailTvShow() {
         onView(withId(R.id.rv_movies)).perform(swipeLeft())
-        onView(withId(R.id.rv_tv_shows)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
-                0,
-                click()
-            )
-        )
+        onView(withId(R.id.rv_tv_shows)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(tvShowLastIndex))
+        onView(withId(R.id.rv_tv_shows)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(tvShowLastIndex, click()))
         onView(withId(R.id.tv_detail_toolbar)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_detail_toolbar)).check(matches(withText(R.string.tv_shows)))
         onView(withId(R.id.img_detail_poster)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_detail_title)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_detail_title)).check(matches(withText(dataTvShows[0].title)))
+        onView(withId(R.id.tv_detail_title)).check(matches(withText(selectedTvShow.title)))
         onView(withId(R.id.tv_detail_rating)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_detail_rating)).check(matches(withText(dataTvShows[0].rating)))
+        onView(withId(R.id.tv_detail_rating)).check(matches(withText(selectedTvShow.rating)))
         onView(withId(R.id.img_detail_poster)).perform(swipeUp())
         onView(withId(R.id.tv_detail_genre)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_detail_genre)).check(matches(withText(dataTvShows[0].genre)))
+        onView(withId(R.id.tv_detail_genre)).check(matches(withText(selectedTvShow.genre)))
         onView(withId(R.id.tv_detail_year)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_detail_year)).check(matches(withText(dataTvShows[0].year.toString())))
+        onView(withId(R.id.tv_detail_year)).check(matches(withText(selectedTvShow.year.toString())))
         onView(withId(R.id.tv_detail_overview)).check(matches(isDisplayed()))
-        onView(withId(R.id.tv_detail_overview)).check(matches(withText(dataTvShows[0].overview)))
+        onView(withId(R.id.tv_detail_overview)).check(matches(withText(selectedTvShow.overview)))
         onView(withId(R.id.btn_detail_back)).perform(click())
         onView(withId(R.id.rv_tv_shows)).check(matches(isDisplayed()))
+    }
+
+    @Test
+    fun detailMovieShareButton() {
+        onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(movieLastIndex))
+        onView(withId(R.id.rv_movies)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(movieLastIndex, click()))
+        onView(withId(R.id.btn_detail_share)).perform(click())
+    }
+
+    @Test
+    fun detailTvShowShareButton() {
+        onView(withId(R.id.rv_movies)).perform(swipeLeft())
+        onView(withId(R.id.rv_tv_shows)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(tvShowLastIndex))
+        onView(withId(R.id.rv_tv_shows)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(tvShowLastIndex, click()))
+        onView(withId(R.id.btn_detail_share)).perform(click())
     }
 }
 
