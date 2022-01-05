@@ -19,7 +19,7 @@ class DetailViewModel : ViewModel() {
         }
     }
 
-    fun getDetailById(dataId: String): DataEntity {
+    fun getDetailById(): DataEntity {
         lateinit var result: DataEntity
         val listData = getListData()
         for (data in listData) {

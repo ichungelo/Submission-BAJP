@@ -29,8 +29,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
         dataId?.let {
             viewModel.setDataId(it)
-            dataDetail = viewModel.getDetailById(it)
         }
+        dataDetail = viewModel.getDetailById()
 
         bindingData()
         buttonBehavior()
