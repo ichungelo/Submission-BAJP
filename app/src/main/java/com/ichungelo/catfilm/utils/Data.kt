@@ -250,7 +250,7 @@ object Data {
                 "12+",
                 "War, Action, Drama, History",
                 "Fast And Furious On Tanks",
-                "",
+                "In 1944, a courageous group of Russian soldiers managed to escape from German captivity in a half-destroyed legendary T-34 tank. Those were the times of unforgettable bravery, fierce fighting, unbreakable love, and legendary miracles.",
                 R.drawable.poster_t_three_four
             )
         )

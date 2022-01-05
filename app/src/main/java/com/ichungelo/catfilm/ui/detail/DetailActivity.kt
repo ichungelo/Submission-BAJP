@@ -1,11 +1,9 @@
 package com.ichungelo.catfilm.ui.detail
 
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.WindowCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.ichungelo.catfilm.R
@@ -72,20 +70,28 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun bindingData() {
         with(binding) {
-            tvDetailTitle.text = dataDetail.title
+            with(tvDetailTitle) {
+                text = dataDetail.title
+                isSelected = true
+            }
             tvDetailYear.text = dataDetail.year.toString()
             tvDetailGenre.text = dataDetail.genre
             tvDetailOverview.text = dataDetail.overview
             tvDetailRating.text = dataDetail.rating
-            tvDetailTagline.text = dataDetail.tagline
+            with(tvDetailTagline) {
+                text = if (dataDetail.tagline.isNotEmpty())
+                    resources.getString(R.string.quotation_mark, dataDetail.tagline)
+                else
+                    ""
+                isSelected = true
+            }
+            tvDetailToolbar.text = if (dataDetail.dataId[0] == 'm')
+                    resources.getString(R.string.movies)
+                else
+                    resources.getString(R.string.tv_shows)
             Glide.with(this@DetailActivity)
                 .load(dataDetail.poster)
                 .into(imgDetailPoster)
-        }
-
-        when (dataDetail.dataId[0]) {
-            'm' -> binding.tvDetailToolbar.text = resources.getString(R.string.movies)
-            't' -> binding.tvDetailToolbar.text = resources.getString(R.string.tv_shows)
         }
     }
 

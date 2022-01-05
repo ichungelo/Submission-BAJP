@@ -1,5 +1,7 @@
 package com.ichungelo.catfilm.ui.main.movies
 
+import android.content.res.Configuration
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
