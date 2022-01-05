@@ -46,6 +46,8 @@ class MainActivityTest {
         onView(withId(R.id.img_detail_poster)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_detail_title)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_detail_title)).check(matches(withText(selectedMovies.title)))
+        onView(withId(R.id.tv_detail_tagline)).check(matches(isDisplayed()))
+        onView(withId(R.id.tv_detail_tagline)).check(matches(withText(selectedMovies.tagline)))
         onView(withId(R.id.tv_detail_rating)).check(matches(isDisplayed()))
         onView(withId(R.id.tv_detail_rating)).check(matches(withText(selectedMovies.rating)))
         onView(withId(R.id.img_detail_poster)).perform(swipeUp())
