@@ -3,16 +3,8 @@ package com.ichungelo.catfilm.ui.splash
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-import android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-import android.view.WindowManager
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.view.WindowCompat
-import androidx.lifecycle.ViewModelProvider
-import com.ichungelo.catfilm.R
 import com.ichungelo.catfilm.databinding.ActivitySplashBinding
 import com.ichungelo.catfilm.ui.main.MainActivity
 
