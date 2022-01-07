@@ -11,11 +11,13 @@ import com.ichungelo.catfilm.databinding.ActivityDetailBinding
 import com.ichungelo.catfilm.model.DataEntity
 
 class DetailActivity : AppCompatActivity(), View.OnClickListener {
-    private lateinit var binding: ActivityDetailBinding
+
+    private var _binding: ActivityDetailBinding? = null
+    private val binding get() = _binding!!
     private lateinit var dataDetail: DataEntity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailBinding.inflate(layoutInflater)
+        _binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.btnDetailBack.setOnClickListener(this)
