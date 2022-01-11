@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ichungelo.catfilm.databinding.FragmentMoviesBinding
-import com.ichungelo.catfilm.ui.main.fragment.DataAdapter
-import com.ichungelo.catfilm.ui.main.fragment.DataViewModel
+import com.ichungelo.catfilm.ui.main.fragment.tvshows.TvShowsAdapter
+import com.ichungelo.catfilm.ui.main.fragment.tvshows.TvShowsViewModel
+import com.ichungelo.catfilm.viewmodel.ViewModelFactory
 
 class MoviesFragment : Fragment() {
     private var _binding: FragmentMoviesBinding? = null
@@ -27,13 +28,13 @@ class MoviesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-            val viewModel = ViewModelProvider(
-                this,
-                ViewModelProvider.NewInstanceFactory()
-            )[DataViewModel::class.java]
-            val movies = viewModel.getMovies()
-            val moviesAdapter = DataAdapter()
-            moviesAdapter.setData(movies)
+            val factory = ViewModelFactory.getInstance(requireActivity())
+            val viewModel = ViewModelProvider(this, factory)[MoviesViewModel::class.java]
+            val moviesAdapter = MoviesAdapter()
+            viewModel.getMovies().observe(viewLifecycleOwner, { movies ->
+                moviesAdapter.setMovies(movies)
+                moviesAdapter.notifyDataSetChanged()
+            })
             with(binding?.rvMovies) {
                 this?.layoutManager = GridLayoutManager(activity, 2)
                 this?.adapter = moviesAdapter

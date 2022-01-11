@@ -1,5 +1,6 @@
 package com.ichungelo.catfilm.ui.main.fragment
 
+import com.ichungelo.catfilm.ui.main.fragment.tvshows.TvShowsViewModel
 import org.junit.Assert.*
 import org.junit.Before
 
@@ -7,11 +8,11 @@ import org.junit.Test
 
 class DataViewModelTest {
 
-    private lateinit var viewModel: DataViewModel
+    private lateinit var viewModel: TvShowsViewModel
 
     @Before
     fun setUp() {
-        viewModel = DataViewModel()
+        viewModel = TvShowsViewModel()
     }
 
     @Test

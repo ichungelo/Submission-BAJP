@@ -6,8 +6,8 @@ import kotlinx.parcelize.Parcelize
 import java.util.*
 
 data class DiscoverMovieResponse(
-    @field:SerializedName("result")
-    var result: List<MovieItems>? = null
+    @field:SerializedName("results")
+    var results: List<MovieItems>? = null
 )
 
 @Parcelize
@@ -51,5 +51,5 @@ data class DetailMovieResponse(
     var voteAverage: Double? = null,
 
     @field:SerializedName("release_date")
-    var releaseDate: Date? = null
+    var releaseDate: String? = null
 )

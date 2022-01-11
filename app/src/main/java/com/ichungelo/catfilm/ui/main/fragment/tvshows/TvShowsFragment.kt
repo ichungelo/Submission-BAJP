@@ -8,8 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ichungelo.catfilm.databinding.FragmentTvShowsBinding
-import com.ichungelo.catfilm.ui.main.fragment.DataAdapter
-import com.ichungelo.catfilm.ui.main.fragment.DataViewModel
+import com.ichungelo.catfilm.viewmodel.ViewModelFactory
 
 class TvShowsFragment : Fragment() {
     private var _binding: FragmentTvShowsBinding? = null
@@ -27,16 +26,16 @@ class TvShowsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-            val viewModel = ViewModelProvider(
-                this,
-                ViewModelProvider.NewInstanceFactory()
-            )[DataViewModel::class.java]
-            val tvShows = viewModel.getTvShows()
-            val tvShowAdapter = DataAdapter()
-            tvShowAdapter.setData(tvShows)
+            val factory = ViewModelFactory.getInstance(requireActivity())
+            val viewModel = ViewModelProvider(this, factory)[TvShowsViewModel::class.java]
+            val tvShowsAdapter = TvShowsAdapter()
+            viewModel.getTvShows().observe(viewLifecycleOwner, { tvShows ->
+                tvShowsAdapter.setTvShows(tvShows)
+                tvShowsAdapter.notifyDataSetChanged()
+            })
             with(binding?.rvTvShows) {
                 this?.layoutManager = GridLayoutManager(activity, 2)
-                this?.adapter = tvShowAdapter
+                this?.adapter = tvShowsAdapter
             }
         }
     }

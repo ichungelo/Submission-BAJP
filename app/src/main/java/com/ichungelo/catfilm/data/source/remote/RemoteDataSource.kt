@@ -19,7 +19,7 @@ class RemoteDataSource {
                 call: Call<DiscoverMovieResponse>,
                 response: Response<DiscoverMovieResponse>
             ) {
-                callback.onAllMoviesReceived(response.body()?.result)
+                callback.onAllMoviesReceived(response.body()?.results)
                 EspressoIdlingResource.decrement()
             }
 
@@ -29,7 +29,7 @@ class RemoteDataSource {
         })
     }
 
-    fun getDetailMovie(callback: LoadDetailMovieCallback, dataId: Int) {
+    fun getDetailMovie(callback: LoadDetailMovieCallback, dataId: String) {
         EspressoIdlingResource.increment()
         val client = ApiConfig.getApiService().getDetailMovie(dataId, API_KEY)
         client.enqueue(object : Callback<DetailMovieResponse> {
@@ -57,7 +57,7 @@ class RemoteDataSource {
                 call: Call<DiscoverTvResponse>,
                 response: Response<DiscoverTvResponse>
             ) {
-                callback.onAllTvShowsReceived(response.body()?.result)
+                callback.onAllTvShowsReceived(response.body()?.results)
                 EspressoIdlingResource.decrement()
             }
 
@@ -67,7 +67,7 @@ class RemoteDataSource {
         })
     }
 
-    fun getDetailTvShow(callback: LoadDetailTvShowCallback, dataId: Int) {
+    fun getDetailTvShow(callback: LoadDetailTvShowCallback, dataId: String) {
         EspressoIdlingResource.increment()
         val client = ApiConfig.getApiService().getDetailTvShow(dataId, API_KEY)
         client.enqueue(object : Callback<DetailTvResponse> {
@@ -92,8 +92,8 @@ class RemoteDataSource {
     }
 
     interface LoadDetailMovieCallback {
-        fun onDetailMovieReceived(detailMovieResponse: DetailMovieResponse?)
         fun onGenresReceived(genreItems: List<GenreItems>?)
+        fun onDetailMovieReceived(detailMovieResponse: DetailMovieResponse?)
     }
 
     interface LoadTvShowsCallback {
@@ -101,8 +101,8 @@ class RemoteDataSource {
     }
 
     interface LoadDetailTvShowCallback {
-        fun onDetailTvShowReceived(detailTvResponse: DetailTvResponse?)
         fun onGenresReceived(genreItems: List<GenreItems>?)
+        fun onDetailTvShowReceived(detailTvResponse: DetailTvResponse?)
 
     }
 

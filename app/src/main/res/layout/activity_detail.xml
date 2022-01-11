@@ -186,6 +186,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/img_detail_backdrop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/tv_detail_genre_title"
                 android:layout_width="0dp"
@@ -198,7 +206,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/img_detail_backdrop" />
 
             <TextView
                 android:id="@+id/tv_detail_genre"
@@ -262,6 +270,34 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_detail_overview_title"
                 tools:targetApi="o" />
+
+            <TextView
+                android:id="@+id/tv_detail_homepage_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="12dp"
+                android:text="@string/homepage"
+                android:textColor="@color/red_700"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_detail_overview" />
+
+            <TextView
+                android:id="@+id/tv_detail_homepage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:justificationMode="inter_word"
+                android:paddingHorizontal="24dp"
+                android:text="@string/dummyweb"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_detail_homepage_title"
+                tools:targetApi="o" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
