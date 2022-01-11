@@ -23,9 +23,9 @@
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:layout_marginTop="4dp"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_cat_film"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -36,13 +36,19 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_toolbar"
+        android:layout_height="25dp"
+        android:background="@color/tab_color"
+        app:tabTextColor="@color/white"
+        app:tabTextAppearance="@style/customTabTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_toolbar"
-        app:tabIndicator="@android:color/transparent"
+        app:tabIndicator="@drawable/bg_toolbar"
+        app:tabIndicatorColor="?android:attr/colorBackground"
+        app:tabIndicatorAnimationMode="elastic"
+        app:tabIndicatorGravity="stretch"
         app:tabSelectedTextColor="@color/red_700" />
+
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"

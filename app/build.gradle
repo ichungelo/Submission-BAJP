@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -12,7 +14,9 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
-
+        buildConfigField("String", "API_KEY", '"e6bdb6f48be06e5fab7cf63f6cd1e550"')
+        buildConfigField("String", "BASE_URL", '"https://api.themoviedb.org/3/"')
+        buildConfigField("String", "IMAGE_URL", '"https://image.tmdb.org/"')
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -35,6 +39,8 @@ android {
 }
 
 dependencies {
+
+    implementation fileTree(dir: 'libs', includes: ['*.jar'])
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
@@ -61,5 +67,16 @@ dependencies {
     androidTestImplementation "androidx.test:runner:1.4.0"
     androidTestImplementation "androidx.test:rules:1.4.0"
     androidTestImplementation "androidx.test.espresso:espresso-contrib:3.4.0"
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+
+    //Logging Interceptor
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+
+    //Idling Resource
+    implementation "androidx.test.espresso:espresso-idling-resource:3.4.0"
+
 
 }

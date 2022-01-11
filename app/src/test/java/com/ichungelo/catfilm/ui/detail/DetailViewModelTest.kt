@@ -1,14 +1,14 @@
 package com.ichungelo.catfilm.ui.detail
 
-import com.ichungelo.catfilm.utils.Data
+import com.ichungelo.catfilm.utils.DataDummy
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
 class DetailViewModelTest {
     private lateinit var viewModel: DetailViewModel
-    private val selectedMovie = Data.generateDataMovies()[0]
-    private val selectedTvShow = Data.generateDataTvShows()[0]
+    private val selectedMovie = DataDummy.generateDataMovies()[0]
+    private val selectedTvShow = DataDummy.generateDataTvShows()[0]
     private val movieDataId = selectedMovie.dataId
     private val tvShowDataId = selectedTvShow.dataId
 
@@ -73,7 +73,7 @@ class DetailViewModelTest {
     @Test
     fun outIndexMovie() {
         val exception = assertThrows(IndexOutOfBoundsException::class.java) {
-            Data.generateDataMovies()[19]
+            DataDummy.generateDataMovies()[19]
         }
         assertEquals("Index 19 out of bounds for length 19", exception.message)
     }
@@ -81,7 +81,7 @@ class DetailViewModelTest {
     @Test
     fun outIndexTvShow() {
         val exception = assertThrows(IndexOutOfBoundsException::class.java) {
-            Data.generateDataTvShows()[20]
+            DataDummy.generateDataTvShows()[20]
         }
         assertEquals("Index 20 out of bounds for length 20", exception.message)
     }

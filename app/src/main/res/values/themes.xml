@@ -10,9 +10,15 @@
         <item name="colorSecondaryVariant">@color/yellow_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/tab_color</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="o_mr1" >true</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/red_700</item>
         <!-- Nav bar color. -->
         <item name="android:navigationBarColor">@color/red_700</item>
+    </style>
+
+    <!--Tab text-->
+    <style name="customTabTitle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="fontFamily">@font/ubuntu_medium</item>
     </style>
 </resources>

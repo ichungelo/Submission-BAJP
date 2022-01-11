@@ -8,16 +8,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.ichungelo.catfilm.R
 import com.ichungelo.catfilm.databinding.ActivityDetailBinding
-import com.ichungelo.catfilm.model.DataEntity
+import com.ichungelo.catfilm.data.DataEntity
 
 class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
-    private var _binding: ActivityDetailBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: ActivityDetailBinding
     private lateinit var dataDetail: DataEntity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityDetailBinding.inflate(layoutInflater)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.btnDetailBack.setOnClickListener(this)

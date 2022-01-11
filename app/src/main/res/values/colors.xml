@@ -9,6 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="text_main">#FF000000</color>
     <color name="bg_title_poster">#BFFFFFFF</color>
-    <color name="tab_color">#FFF1F1F1</color>
-    <color name="tab_color_transparent">#B2F1F1F1</color>
+    <color name="tab_color">#FFD32F2F</color>
+    <color name="tab_color_transparent">#B2D32F2F</color>
 </resources>

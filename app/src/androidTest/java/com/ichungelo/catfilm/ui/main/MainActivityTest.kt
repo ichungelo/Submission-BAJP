@@ -8,15 +8,15 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.ichungelo.catfilm.R
-import com.ichungelo.catfilm.utils.Data
+import com.ichungelo.catfilm.utils.DataDummy
 import org.junit.Rule
 import org.junit.Test
 
 class MainActivityTest {
-    private val dataMovies = Data.generateDataMovies()
+    private val dataMovies = DataDummy.generateDataMovies()
     private val movieLastIndex = dataMovies.lastIndex
     private val selectedMovies = dataMovies[movieLastIndex]
-    private val dataTvShows = Data.generateDataTvShows()
+    private val dataTvShows = DataDummy.generateDataTvShows()
     private val tvShowLastIndex = dataTvShows.lastIndex
     private val selectedTvShow = dataTvShows[tvShowLastIndex]
 

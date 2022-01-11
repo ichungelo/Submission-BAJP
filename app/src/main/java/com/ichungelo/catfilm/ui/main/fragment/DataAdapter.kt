@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ichungelo.catfilm.databinding.ItemsPosterBinding
-import com.ichungelo.catfilm.model.DataEntity
+import com.ichungelo.catfilm.data.DataEntity
 import com.ichungelo.catfilm.ui.detail.DetailActivity
 
 class DataAdapter : RecyclerView.Adapter<DataAdapter.DataViewHolder>() {

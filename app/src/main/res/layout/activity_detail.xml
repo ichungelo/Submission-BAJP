@@ -142,7 +142,7 @@
                         android:gravity="center"
                         android:maxLines="2"
                         android:text="@string/movies"
-                        android:textColor="@color/red_700"
+                        android:textColor="@color/white"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toStartOf="@+id/btn_detail_share"

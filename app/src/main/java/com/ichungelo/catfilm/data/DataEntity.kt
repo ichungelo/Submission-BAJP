@@ -1,4 +1,4 @@
-package com.ichungelo.catfilm.model
+package com.ichungelo.catfilm.data
 
 data class DataEntity(
     var dataId: String,
@@ -8,5 +8,5 @@ data class DataEntity(
     var genre: String,
     var tagline: String,
     var overview: String,
-    var poster: Int
+    var poster: String
 )

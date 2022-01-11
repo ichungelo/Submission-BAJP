@@ -10,7 +10,7 @@
         <item name="colorSecondaryVariant">@color/yellow_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/tab_color</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/red_700</item>
         <!-- Nav bar color. -->
         <item name="android:navigationBarColor">@color/red_700</item>
     </style>

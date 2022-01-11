@@ -18,7 +18,7 @@
         android:text="@string/movie_list"
         android:textColor="@color/text_main"
         android:textSize="24sp"
-        app:drawableStartCompat="@drawable/ic_play"
+        app:drawableStartCompat="@drawable/ic_movie"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

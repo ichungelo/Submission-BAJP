@@ -1,8 +1,8 @@
 package com.ichungelo.catfilm.ui.detail
 
 import androidx.lifecycle.ViewModel
-import com.ichungelo.catfilm.model.DataEntity
-import com.ichungelo.catfilm.utils.Data
+import com.ichungelo.catfilm.data.DataEntity
+import com.ichungelo.catfilm.utils.DataDummy
 
 class DetailViewModel : ViewModel() {
     private lateinit var dataId: String
@@ -13,9 +13,9 @@ class DetailViewModel : ViewModel() {
 
     private fun getListData(): ArrayList<DataEntity> {
         return if (dataId[0] == 'm') {
-            Data.generateDataMovies() as ArrayList<DataEntity>
+            DataDummy.generateDataMovies() as ArrayList<DataEntity>
         } else {
-            Data.generateDataTvShows() as ArrayList<DataEntity>
+            DataDummy.generateDataTvShows() as ArrayList<DataEntity>
         }
     }
 

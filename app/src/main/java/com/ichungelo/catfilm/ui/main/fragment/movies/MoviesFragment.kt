@@ -13,14 +13,14 @@ import com.ichungelo.catfilm.ui.main.fragment.DataViewModel
 
 class MoviesFragment : Fragment() {
     private var _binding: FragmentMoviesBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         _binding = FragmentMoviesBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,9 +34,9 @@ class MoviesFragment : Fragment() {
             val movies = viewModel.getMovies()
             val moviesAdapter = DataAdapter()
             moviesAdapter.setData(movies)
-            with(binding.rvMovies) {
-                layoutManager = GridLayoutManager(activity, 2)
-                adapter = moviesAdapter
+            with(binding?.rvMovies) {
+                this?.layoutManager = GridLayoutManager(activity, 2)
+                this?.adapter = moviesAdapter
             }
         }
     }
