@@ -1,7 +1,8 @@
 package com.ichungelo.catfilm.ui.detail
 
+import android.annotation.SuppressLint
 import android.content.Intent
-import android.media.tv.TvContract.Programs.Genres.MOVIES
+import android.icu.text.SimpleDateFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -13,11 +14,13 @@ import com.ichungelo.catfilm.databinding.ActivityDetailBinding
 import com.ichungelo.catfilm.data.DataEntity
 import com.ichungelo.catfilm.data.DetailEntity
 import com.ichungelo.catfilm.viewmodel.ViewModelFactory
+import java.util.*
 
 class DetailActivity : AppCompatActivity(), View.OnClickListener {
-    private var category: String? = null
     private lateinit var binding: ActivityDetailBinding
-    private var genreList: String = ""
+    private lateinit var category: String
+    private lateinit var genreList: String
+    private lateinit var releaseDate: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -28,12 +31,14 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         val viewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
 
         val dataId = intent.getParcelableExtra<DataEntity>(EXTRA_DATA) as DataEntity
-        category = intent.extras?.getString(EXTRA_CATEGORY)
+        category = intent.extras?.getString(EXTRA_CATEGORY).toString()
         dataId.let {
             viewModel.setDataId(it.id.toString())
-            viewModel.setDetail(category)
         }
-        viewModel.getDetailData().observe(this, { dataDetail ->
+        progressBarVisibility(true)
+
+        viewModel.getDetailData(category).observe(this, { dataDetail ->
+            progressBarVisibility(false)
             buttonBehavior(dataDetail)
             bindingData(dataDetail)
         })
@@ -51,7 +56,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                         Intent.EXTRA_TEXT, """
                         CAT FILM
                         Title: ${dataDetail.title}
-                        Year: ${dataDetail.releaseDate}
+                        Release Date: ${dataDetail.releaseDate}
                         Rating: ${dataDetail.voteAverage}
                         Genre: $genreList
                         Overview: ${dataDetail.overview}
@@ -71,17 +76,30 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    @SuppressLint("NewApi")
     private fun bindingData(dataDetail: DetailEntity) {
+        val date = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(dataDetail.releaseDate)
+        var genre = ""
         for (i in dataDetail.genres!!) {
-            genreList += "${i.name}, "
+            genre += "${i.name}, "
         }
+        releaseDate = SimpleDateFormat("dd MMMM yyyy", Locale.US).format(date)
+        genreList = genre
+
         with(binding) {
             with(tvDetailTitle) {
                 text = dataDetail.title
                 isSelected = true
             }
-            tvDetailHomepage.text = dataDetail.homepage
-            tvDetailYear.text = dataDetail.releaseDate
+
+            if (dataDetail.homepage.isNullOrEmpty()) {
+                tvDetailHomepage.visibility = View.GONE
+                tvDetailHomepageTitle.visibility = View.GONE
+            } else {
+                tvDetailHomepage.text = dataDetail.homepage
+            }
+
+            tvDetailYear.text = releaseDate
             tvDetailGenre.text = genreList
             tvDetailOverview.text = dataDetail.overview
             tvDetailRating.text = dataDetail.voteAverage.toString()
@@ -92,7 +110,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                     ""
                 isSelected = true
             }
-            tvDetailToolbar.text = if (category == "movie")
+            tvDetailToolbar.text = if (category == resources.getString(R.string.movies))
                     resources.getString(R.string.movies)
                 else
                     resources.getString(R.string.tv_shows)
@@ -104,6 +122,10 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                 .into(imgDetailBackdrop)
 
         }
+    }
+
+    private fun progressBarVisibility(isLoading: Boolean) {
+        binding.progressDetail.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     companion object {

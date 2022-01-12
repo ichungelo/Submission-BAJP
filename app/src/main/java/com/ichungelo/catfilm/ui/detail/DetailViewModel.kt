@@ -7,24 +7,21 @@ import com.ichungelo.catfilm.data.source.TmdbRepository
 
 class DetailViewModel(private val tmdbRepository: TmdbRepository) : ViewModel() {
     private lateinit var dataId: String
-    private lateinit var dataDetail: LiveData<DetailEntity>
 
     fun setDataId(dataId: String) {
         this.dataId = dataId
     }
 
-    fun setDetail(from: String?) {
-        if(MOVIE == from) {
-            dataDetail = tmdbRepository.getDetailMovie(dataId)
-        } else if (TV_SHOW == from) {
-            dataDetail = tmdbRepository.getDetailTvShow(dataId)
+    fun getDetailData(from: String?): LiveData<DetailEntity> {
+        return if(MOVIE == from) {
+            tmdbRepository.getDetailMovie(dataId)
+        } else {
+            tmdbRepository.getDetailTvShow(dataId)
         }
     }
 
-    fun getDetailData() = dataDetail
-
     companion object {
-        const val MOVIE = "movie"
-        const val TV_SHOW = "tvShow"
+        const val MOVIE = "Movies"
+        const val TV_SHOW = "Tv Shows"
     }
 }

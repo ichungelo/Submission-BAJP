@@ -1,6 +1,5 @@
 package com.ichungelo.catfilm.api
 
-import com.ichungelo.catfilm.data.DataEntity
 import com.ichungelo.catfilm.data.source.remote.response.DetailMovieResponse
 import com.ichungelo.catfilm.data.source.remote.response.DetailTvResponse
 import com.ichungelo.catfilm.data.source.remote.response.DiscoverMovieResponse

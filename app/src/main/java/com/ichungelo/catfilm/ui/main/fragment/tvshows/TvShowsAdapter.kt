@@ -26,12 +26,12 @@ class TvShowsAdapter : RecyclerView.Adapter<TvShowsAdapter.TvShowsViewHolder>() 
             with(binding) {
                 tvTitlePoster.text = tvShow.title
                 Glide.with(itemView.context)
-                    .load( "${BuildConfig.IMAGE_URL}t/p/w500${tvShow.posterPath}")
+                    .load("${BuildConfig.IMAGE_URL}t/p/w500${tvShow.posterPath}")
                     .into(imgPoster)
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailActivity::class.java)
                     intent.putExtra(DetailActivity.EXTRA_DATA, tvShow)
-                    intent.putExtra(DetailActivity.EXTRA_CATEGORY,TV_SHOW)
+                    intent.putExtra(DetailActivity.EXTRA_CATEGORY, TV_SHOW)
                     itemView.context.startActivity(intent)
                 }
             }

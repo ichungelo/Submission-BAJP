@@ -7,8 +7,7 @@ import com.ichungelo.catfilm.data.DetailEntity
 import com.ichungelo.catfilm.data.source.remote.RemoteDataSource
 import com.ichungelo.catfilm.data.source.remote.response.*
 
-class TmdbRepository private constructor(private val remoteDataSource: RemoteDataSource) :
-    TmdbDataSource {
+class FakeTmdbRepository(private val remoteDataSource: RemoteDataSource) : TmdbDataSource {
 
     override fun getMovies(): LiveData<List<DataEntity>> {
         val discoverMoviesResult = MutableLiveData<List<DataEntity>>()
@@ -100,14 +99,5 @@ class TmdbRepository private constructor(private val remoteDataSource: RemoteDat
             }
         }, dataId)
         return detailTvShowResult
-    }
-
-    companion object {
-        @Volatile
-        private var instance: TmdbRepository? = null
-        fun getInstance(remoteData: RemoteDataSource): TmdbRepository =
-            instance ?: synchronized(this) {
-                instance ?: TmdbRepository(remoteData).apply { instance = this }
-            }
     }
 }

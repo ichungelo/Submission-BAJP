@@ -26,12 +26,12 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
             with(binding) {
                 tvTitlePoster.text = movie.title
                 Glide.with(itemView.context)
-                    .load( "${BuildConfig.IMAGE_URL}t/p/w500${movie.posterPath}")
+                    .load("${BuildConfig.IMAGE_URL}t/p/w500${movie.posterPath}")
                     .into(imgPoster)
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailActivity::class.java)
                     intent.putExtra(DetailActivity.EXTRA_DATA, movie)
-                    intent.putExtra(DetailActivity.EXTRA_CATEGORY,MOVIE)
+                    intent.putExtra(DetailActivity.EXTRA_CATEGORY, MOVIE)
                     itemView.context.startActivity(intent)
                 }
             }

@@ -38,7 +38,6 @@ class RemoteDataSource {
                 response: Response<DetailMovieResponse>
             ) {
                 callback.onDetailMovieReceived(response.body())
-                callback.onGenresReceived(response.body()?.genres)
                 EspressoIdlingResource.decrement()
             }
 
@@ -76,7 +75,6 @@ class RemoteDataSource {
                 response: Response<DetailTvResponse>
             ) {
                 callback.onDetailTvShowReceived(response.body())
-                callback.onGenresReceived(response.body()?.genres)
                 EspressoIdlingResource.decrement()
             }
 
@@ -92,7 +90,6 @@ class RemoteDataSource {
     }
 
     interface LoadDetailMovieCallback {
-        fun onGenresReceived(genreItems: List<GenreItems>?)
         fun onDetailMovieReceived(detailMovieResponse: DetailMovieResponse?)
     }
 
@@ -101,7 +98,6 @@ class RemoteDataSource {
     }
 
     interface LoadDetailTvShowCallback {
-        fun onGenresReceived(genreItems: List<GenreItems>?)
         fun onDetailTvShowReceived(detailTvResponse: DetailTvResponse?)
 
     }

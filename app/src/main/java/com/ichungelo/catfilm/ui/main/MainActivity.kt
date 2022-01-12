@@ -30,9 +30,5 @@ class MainActivity : AppCompatActivity() {
             R.string.movies,
             R.string.tv_shows
         )
-        private val TAB_ICON = intArrayOf(
-            R.drawable.ic_movie,
-            R.drawable.ic_device_tv
-        )
     }
 }
