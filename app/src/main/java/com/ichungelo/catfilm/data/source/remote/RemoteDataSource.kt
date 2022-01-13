@@ -25,6 +25,7 @@ class RemoteDataSource {
 
             override fun onFailure(call: Call<DiscoverMovieResponse>, t: Throwable) {
                 Log.e(TAG, "getAllMovies onFailure : ${t.message}")
+                EspressoIdlingResource.decrement()
             }
         })
     }
@@ -43,6 +44,7 @@ class RemoteDataSource {
 
             override fun onFailure(call: Call<DetailMovieResponse>, t: Throwable) {
                 Log.e(TAG, "getDetailMovie onFailure : ${t.message}")
+                EspressoIdlingResource.decrement()
             }
 
         })
@@ -62,6 +64,7 @@ class RemoteDataSource {
 
             override fun onFailure(call: Call<DiscoverTvResponse>, t: Throwable) {
                 Log.e(TAG, "getAllTvShows onFailure : ${t.message}")
+                EspressoIdlingResource.decrement()
             }
         })
     }
@@ -80,6 +83,7 @@ class RemoteDataSource {
 
             override fun onFailure(call: Call<DetailTvResponse>, t: Throwable) {
                 Log.e(TAG, "getDetailMovie onFailure : ${t.message}")
+                EspressoIdlingResource.decrement()
             }
         })
     }
