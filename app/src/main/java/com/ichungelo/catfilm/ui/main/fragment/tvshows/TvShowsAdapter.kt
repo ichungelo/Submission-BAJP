@@ -3,6 +3,7 @@ package com.ichungelo.catfilm.ui.main.fragment.tvshows
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ichungelo.catfilm.BuildConfig
@@ -10,14 +11,18 @@ import com.ichungelo.catfilm.databinding.ItemsPosterBinding
 import com.ichungelo.catfilm.data.DataEntity
 import com.ichungelo.catfilm.ui.detail.DetailActivity
 import com.ichungelo.catfilm.ui.detail.DetailViewModel.Companion.TV_SHOW
+import com.ichungelo.catfilm.utils.DiffCallback
 
 class TvShowsAdapter : RecyclerView.Adapter<TvShowsAdapter.TvShowsViewHolder>() {
     private val listTvShows = ArrayList<DataEntity>()
 
     fun setTvShows(tvShows: List<DataEntity>?) {
         if (tvShows == null) return
+        val diffCallback = DiffCallback(this.listTvShows,tvShows)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
         this.listTvShows.clear()
         this.listTvShows.addAll(tvShows)
+        diffResult.dispatchUpdatesTo(this)
     }
 
     class TvShowsViewHolder(private val binding: ItemsPosterBinding) :

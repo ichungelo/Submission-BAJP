@@ -23,7 +23,6 @@ class TvShowsFragment : Fragment() {
         return binding?.root
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         progressBarVisibility(true)
@@ -34,7 +33,6 @@ class TvShowsFragment : Fragment() {
             viewModel.getTvShows().observe(viewLifecycleOwner, { tvShows ->
                 progressBarVisibility(false)
                 tvShowsAdapter.setTvShows(tvShows)
-                tvShowsAdapter.notifyDataSetChanged()
             })
             with(binding?.rvTvShows) {
                 this?.layoutManager = GridLayoutManager(activity, 2)

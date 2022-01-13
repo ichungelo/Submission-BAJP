@@ -76,14 +76,13 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    @SuppressLint("NewApi")
     private fun bindingData(dataDetail: DetailEntity) {
-        val date = SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(dataDetail.releaseDate)
+        val date = java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(dataDetail.releaseDate!!)
         var genre = ""
         for (i in dataDetail.genres!!) {
             genre += "${i.name}, "
         }
-        releaseDate = SimpleDateFormat("dd MMMM yyyy", Locale.US).format(date)
+        releaseDate = java.text.SimpleDateFormat("dd MMMM yyyy", Locale.US).format(date!!)
         genreList = genre
 
         with(binding) {

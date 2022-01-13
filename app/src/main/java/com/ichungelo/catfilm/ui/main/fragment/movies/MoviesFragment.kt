@@ -23,7 +23,6 @@ class MoviesFragment : Fragment() {
         return binding?.root
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         progressBarVisibility(true)
@@ -35,7 +34,6 @@ class MoviesFragment : Fragment() {
             viewModel.getMovies().observe(viewLifecycleOwner, { movies ->
                 progressBarVisibility(false)
                 moviesAdapter.setMovies(movies)
-                moviesAdapter.notifyDataSetChanged()
             })
             with(binding?.rvMovies) {
                 this?.layoutManager = GridLayoutManager(activity, 2)

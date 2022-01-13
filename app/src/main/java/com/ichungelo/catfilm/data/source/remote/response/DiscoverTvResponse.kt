@@ -1,15 +1,12 @@
 package com.ichungelo.catfilm.data.source.remote.response
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
 data class DiscoverTvResponse(
     @field:SerializedName("results")
     var results: List<TvItems>? = null
 )
 
-@Parcelize
 data class TvItems(
     @field:SerializedName("id")
     var id: Int? = null,
@@ -19,7 +16,7 @@ data class TvItems(
 
     @field:SerializedName("poster_path")
     var posterPath: String? = null,
-) : Parcelable
+)
 
 data class DetailTvResponse(
     @field:SerializedName("genres")

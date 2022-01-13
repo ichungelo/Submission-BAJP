@@ -20,7 +20,7 @@ import org.junit.Test
 class MainActivityTest {
     private val selectedMovies = DataDummy.generateRemoteDetailMovie()
     private val selectedTvShow = DataDummy.generateRemoteDetailTvShow()
-    private val moviePosition = 1
+    private val moviePosition = 2
     private val tvShowPosition = 0
     private val totalMovies = 20
     private val totalTvShows = 20

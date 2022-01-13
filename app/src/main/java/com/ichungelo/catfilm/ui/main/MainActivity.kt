@@ -2,8 +2,6 @@ package com.ichungelo.catfilm.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ichungelo.catfilm.R
 import com.ichungelo.catfilm.databinding.ActivityMainBinding
@@ -16,9 +14,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val sectionPagerAdapter = SectionPagerAdapter(this)
-        val viewPager2: ViewPager2 = findViewById(R.id.view_pager)
+        val viewPager2 = binding.viewPager
         viewPager2.adapter = sectionPagerAdapter
-        val tabs: TabLayout = findViewById(R.id.tabs)
+        val tabs = binding.tabs
         TabLayoutMediator(tabs, viewPager2) { tab, position ->
             tab.setText(TAB_TITLE[position])
         }.attach()
