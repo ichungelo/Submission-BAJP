@@ -1,11 +1,10 @@
 package com.ichungelo.catfilm.ui.detail
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.icu.text.SimpleDateFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.ichungelo.catfilm.BuildConfig
@@ -13,14 +12,14 @@ import com.ichungelo.catfilm.R
 import com.ichungelo.catfilm.databinding.ActivityDetailBinding
 import com.ichungelo.catfilm.data.DataEntity
 import com.ichungelo.catfilm.data.DetailEntity
+import com.ichungelo.catfilm.data.source.remote.response.GenreItems
 import com.ichungelo.catfilm.viewmodel.ViewModelFactory
+import java.text.SimpleDateFormat
 import java.util.*
 
 class DetailActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var category: String
-    private lateinit var genreList: String
-    private lateinit var releaseDate: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
@@ -56,9 +55,9 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                         Intent.EXTRA_TEXT, """
                         CAT FILM
                         Title: ${dataDetail.title}
-                        Release Date: ${dataDetail.releaseDate}
+                        Release Date: ${setDateFormat(dataDetail.releaseDate)}
                         Rating: ${dataDetail.voteAverage}
-                        Genre: $genreList
+                        Genre: ${setGenreFormat(dataDetail.genres)}
                         Overview: ${dataDetail.overview}
                     """.trimIndent()
                     )
@@ -77,50 +76,50 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun bindingData(dataDetail: DetailEntity) {
-        val date = java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(dataDetail.releaseDate!!)
-        var genre = ""
-        for (i in dataDetail.genres!!) {
-            genre += "${i.name}, "
-        }
-        releaseDate = java.text.SimpleDateFormat("dd MMMM yyyy", Locale.US).format(date!!)
-        genreList = genre
-
         with(binding) {
             with(tvDetailTitle) {
                 text = dataDetail.title
                 isSelected = true
             }
-
-            if (dataDetail.homepage.isNullOrEmpty()) {
-                tvDetailHomepage.visibility = View.GONE
-                tvDetailHomepageTitle.visibility = View.GONE
-            } else {
-                tvDetailHomepage.text = dataDetail.homepage
-            }
-
-            tvDetailYear.text = releaseDate
-            tvDetailGenre.text = genreList
+            tvDetailHomepage.text = dataDetail.homepage
+            tvDetailYear.text = setDateFormat(dataDetail.releaseDate)
+            tvDetailGenre.text = setGenreFormat(dataDetail.genres)
             tvDetailOverview.text = dataDetail.overview
             tvDetailRating.text = dataDetail.voteAverage.toString()
             with(tvDetailTagline) {
-                text = if (dataDetail.tagline != null)
-                    resources.getString(R.string.quotation_mark, dataDetail.tagline)
-                else
-                    ""
+                text = dataDetail.tagline
                 isSelected = true
             }
-            tvDetailToolbar.text = if (category == resources.getString(R.string.movies))
-                    resources.getString(R.string.movies)
-                else
-                    resources.getString(R.string.tv_shows)
-            Glide.with(this@DetailActivity)
-                .load("${BuildConfig.IMAGE_URL}t/p/w500/${dataDetail.posterPath}")
-                .into(imgDetailPoster)
-            Glide.with(this@DetailActivity)
-                .load("${BuildConfig.IMAGE_URL}t/p/w500/${dataDetail.backdropPath}")
-                .into(imgDetailBackdrop)
-
+            tvDetailToolbar.text = setToolbarTitle()
+            imageGlider(dataDetail.posterPath, imgDetailPoster)
+            imageGlider(dataDetail.backdropPath, imgDetailBackdrop)
         }
+    }
+
+    private fun setGenreFormat(genre: List<GenreItems>?): String {
+        var result = ""
+        for (i in genre!!) {
+            result += "${i.name}, "
+        }
+        return result
+    }
+
+    private fun setDateFormat(date: String?): String {
+        val dateFormatOrigin = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(date!!)
+        return SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(dateFormatOrigin!!)
+    }
+
+    private fun setToolbarTitle(): String {
+        return if (category == resources.getString(R.string.movie_category))
+            resources.getString(R.string.movies)
+        else
+            resources.getString(R.string.tv_shows)
+    }
+
+    private fun imageGlider(path: String?, view: ImageView) {
+        Glide.with(this@DetailActivity)
+            .load("${BuildConfig.IMAGE_URL}t/p/w500/${path}")
+            .into(view)
     }
 
     private fun progressBarVisibility(isLoading: Boolean) {

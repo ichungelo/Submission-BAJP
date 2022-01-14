@@ -21,7 +21,7 @@ class DetailViewModel(private val tmdbRepository: TmdbRepository) : ViewModel() 
     }
 
     companion object {
-        const val MOVIE = "Movies"
-        const val TV_SHOW = "Tv Shows"
+        const val MOVIE = "movie"
+        const val TV_SHOW = "tv"
     }
 }

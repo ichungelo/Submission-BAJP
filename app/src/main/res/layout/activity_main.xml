@@ -7,9 +7,9 @@
     tools:context=".ui.main.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/main_toolbar"
+        android:id="@+id/toolbar_main"
         android:layout_width="match_parent"
-        android:layout_height="64dp"
+        android:layout_height="80dp"
         android:background="@color/tab_color"
         app:contentInsetStart="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,15 +20,40 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="4dp"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_cat_film"
-                app:layout_constraintEnd_toEndOf="parent"
+            <Button
+                android:id="@+id/btn_search"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_search"
+                android:drawableLeft="@drawable/ic_search"
+                android:drawableTint="?android:attr/textColorSecondary"
+                android:elevation="0dp"
+                android:gravity="start"
+                android:hint="Search.."
+                android:selectAllOnFocus="false"
+                android:textAllCaps="false"
+                android:textColor="?android:attr/textColorSecondary"
+                app:backgroundTint="@color/black"
+                app:backgroundTintMode="screen"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_favorite"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btn_favorite"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_heart"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_search"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btn_search" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
@@ -38,16 +63,15 @@
         android:layout_width="match_parent"
         android:layout_height="25dp"
         android:background="@color/tab_color"
-        app:tabTextColor="@color/white"
         app:tabTextAppearance="@style/customTabTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_main"
         app:tabIndicator="@drawable/bg_toolbar"
         app:tabIndicatorColor="?android:attr/colorBackground"
         app:tabIndicatorAnimationMode="elastic"
         app:tabIndicatorGravity="stretch"
-        app:tabSelectedTextColor="@color/red_700" />
+        app:tabSelectedTextColor="@color/red_500" />
 
 
     <androidx.viewpager2.widget.ViewPager2

@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="red_200">#EF9A9A</color>
     <color name="red_500">#F44336</color>
     <color name="red_700">#D32F2F</color>
-    <color name="yellow_200">#DABD03</color>
+    <color name="yellow_400">#DABD03</color>
     <color name="yellow_700">#FFB300</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="text_main">#FF000000</color>
     <color name="title_poster">#BFFFFFFF</color>
-    <color name="tab_color">#FFD32F2F</color>
-    <color name="tab_color_transparent">#B2D32F2F</color>
+    <color name="tab_color">#F1F1F1</color>
+    <color name="tab_color_transparent">#B3F1F1F1</color>
 </resources>

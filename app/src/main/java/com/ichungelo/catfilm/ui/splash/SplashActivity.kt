@@ -5,6 +5,8 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.WindowInsets
 import com.ichungelo.catfilm.databinding.ActivitySplashBinding
 import com.ichungelo.catfilm.ui.main.MainActivity
 
@@ -18,8 +20,12 @@ class SplashActivity : AppCompatActivity() {
         val splashStatusBarColor = Color.rgb(211, 47, 47)
         val splashNavigationBarColor = Color.rgb(211, 47, 47)
 
-        window.statusBarColor = splashStatusBarColor
-        window.navigationBarColor = splashNavigationBarColor
+        with(window) {
+            statusBarColor = splashStatusBarColor
+            navigationBarColor = splashNavigationBarColor
+        }
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
+
 
         sleepSplash()
     }

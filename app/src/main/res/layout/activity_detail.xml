@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/movie_poster"
-                android:src="@color/red_700"
+                android:src="@color/tab_color"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax" />
 
@@ -70,7 +70,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="110dp"
                 android:background="@drawable/bg_detail_slider"
                 android:layout_gravity="bottom"
                 android:elevation="1dp">
@@ -78,9 +78,9 @@
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="match_parent"
-                    android:layout_height="5dp"
+                    android:layout_height="3dp"
                     android:layout_gravity="bottom"
-                    android:layout_marginHorizontal="100dp"
+                    android:layout_marginHorizontal="180dp"
                     android:layout_marginTop="10dp"
                     android:elevation="2dp"
                     android:src="@drawable/bg_detail_slider_marker"
@@ -89,21 +89,32 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription" />
 
+                <ImageButton
+                    android:id="@+id/btn_detail_favorite"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_heart_unselected"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_detail_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_detail_title" />
+
+
                 <TextView
                     android:id="@+id/tv_detail_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:drawablePadding="8dp"
-                    android:fontFamily="@font/ubuntu_medium"
-                    android:padding="16dp"
-                    android:singleLine="true"
-                    android:scrollHorizontally="true"
-                    android:marqueeRepeatLimit="marquee_forever"
                     android:ellipsize="marquee"
                     android:fadingEdge="horizontal"
-                    android:textSize="36sp"
-                    app:drawableStartCompat="@drawable/ic_play"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:fontFamily="@font/ubuntu_medium"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:padding="16dp"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textColor="@color/text_main"
+                    android:textSize="28sp"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_detail_favorite"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -126,9 +137,9 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/main_toolbar"
+                android:id="@+id/toolbar_detail"
                 android:layout_width="match_parent"
-                android:layout_height="184dp"
+                android:layout_height="174dp"
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="pin"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -139,21 +150,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
-                        android:id="@+id/tv_detail_toolbar"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:fontFamily="@font/ubuntu_medium"
-                        android:gravity="center"
-                        android:maxLines="2"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@+id/btn_detail_share"
-                        app:layout_constraintStart_toEndOf="@+id/btn_detail_back"
-                        app:layout_constraintTop_toTopOf="parent" />
-
                     <ImageButton
                         android:id="@+id/btn_detail_back"
                         android:layout_width="64dp"
@@ -162,6 +158,21 @@
                         android:contentDescription="@string/back_button"
                         android:src="@drawable/ic_chevron_left"
                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_detail_toolbar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:textColor="@color/red_700"
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toStartOf="@+id/btn_detail_share"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toEndOf="@+id/btn_detail_back"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageButton
@@ -208,7 +219,7 @@
                 android:paddingHorizontal="12dp"
                 android:paddingTop="12dp"
                 android:text="@string/genre"
-                android:textColor="@color/red_700"
+                android:textColor="@color/red_500"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -232,7 +243,7 @@
                 android:paddingHorizontal="12dp"
                 android:paddingTop="12dp"
                 android:text="@string/year"
-                android:textColor="@color/red_700"
+                android:textColor="@color/red_500"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -256,7 +267,7 @@
                 android:paddingHorizontal="12dp"
                 android:paddingTop="12dp"
                 android:text="@string/overview"
-                android:textColor="@color/red_700"
+                android:textColor="@color/red_500"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -282,7 +293,7 @@
                 android:paddingHorizontal="12dp"
                 android:paddingTop="12dp"
                 android:text="@string/homepage"
-                android:textColor="@color/red_700"
+                android:textColor="@color/red_500"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -16,9 +16,11 @@
     <string name="text_company">Copyright \u00A9 Ichungelo Inc - 2022\nAll Right reserved.</string>
     <string name="company_logo">company logo</string>
     <string name="share_button">share button</string>
-    <string name="quotation_mark">\"%s\"</string>
     <string name="homepage">Homepage</string>
     <string name="dummyweb">www.dummyweb.com</string>
     <string name="backdrop_image">backdrop image</string>
+    <string name="favorite">Favorite</string>
+    <string name="movie_category">movie</string>
+    <string name="tv_category">tv</string>
 
 </resources>

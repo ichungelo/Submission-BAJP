@@ -27,7 +27,7 @@
             android:layout_gravity="center"
             android:contentDescription="@string/app_name"
             android:padding="16dp"
-            android:src="@drawable/ic_splash_cat_film" />
+            android:src="@drawable/ic_cat_film" />
 
 
     </androidx.cardview.widget.CardView>
