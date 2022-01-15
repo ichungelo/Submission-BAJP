@@ -6,6 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.fragment.movies.MoviesFragment">
 
+    <Button
+        android:id="@+id/btn_search_movies"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_search"
+        android:drawableLeft="@drawable/ic_search"
+        android:drawableTint="?android:attr/textColorSecondary"
+        android:elevation="0dp"
+        android:gravity="start"
+        android:hint="Search Movies.."
+        android:selectAllOnFocus="false"
+        android:textAllCaps="false"
+        android:textColor="?android:attr/textColorSecondary"
+        app:backgroundTint="@color/black"
+        app:backgroundTintMode="screen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/tv_movie_list"
         android:layout_width="match_parent"
@@ -21,7 +44,7 @@
         app:drawableStartCompat="@drawable/ic_movie"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_search_movies" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_movies"

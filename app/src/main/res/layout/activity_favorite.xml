@@ -9,7 +9,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="84dp"
+        android:layout_height="60dp"
         app:contentInsetStart="0dp"
         android:background="@color/tab_color"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,10 +23,11 @@
             <ImageButton
                 android:id="@+id/btn_favorite_back"
                 android:layout_width="64dp"
-                android:layout_height="64dp"
+                android:layout_height="0dp"
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/back_button"
                 android:src="@drawable/ic_chevron_left"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,26 +47,32 @@
                 app:layout_constraintStart_toEndOf="@+id/btn_favorite_back"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:src="@drawable/bg_detail_slider"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/textView"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/favorite_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:background="@color/tab_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:tabIndicator="@drawable/bg_toolbar"
+        app:tabIndicatorAnimationMode="elastic"
+        app:tabIndicatorColor="?android:attr/colorBackground"
+        app:tabIndicatorGravity="stretch"
+        app:tabSelectedTextColor="@color/red_500"
+        app:tabTextAppearance="@style/customTabTitle" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/favorite_view_pager"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
-        android:text="THIS IS FAVORITE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/favorite_tabs" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

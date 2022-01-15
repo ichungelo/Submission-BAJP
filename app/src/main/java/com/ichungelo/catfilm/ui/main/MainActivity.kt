@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar?.elevation = 0f
 
         with(binding) {
-            btnSearch.setOnClickListener(this@MainActivity)
             btnFavorite.setOnClickListener(this@MainActivity)
         }
     }
@@ -41,10 +40,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v?.id) {
-            R.id.btn_search -> {
-                val searchActivityIntent = Intent(this, SearchActivity::class.java)
-                startActivity(searchActivityIntent)
-            }
             R.id.btn_favorite -> {
                 val favoriteActivityIntent = Intent(this, FavoriteActivity::class.java)
                 startActivity(favoriteActivityIntent)

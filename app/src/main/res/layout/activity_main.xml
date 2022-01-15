@@ -9,7 +9,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_main"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:background="@color/tab_color"
         app:contentInsetStart="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,40 +20,31 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/btn_search"
-                style="?android:attr/borderlessButtonStyle"
+            <TextView
+                android:id="@+id/tv_favorite_toolbar"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/bg_search"
-                android:drawableLeft="@drawable/ic_search"
-                android:drawableTint="?android:attr/textColorSecondary"
-                android:elevation="0dp"
-                android:gravity="start"
-                android:hint="Search.."
-                android:selectAllOnFocus="false"
-                android:textAllCaps="false"
-                android:textColor="?android:attr/textColorSecondary"
-                app:backgroundTint="@color/black"
-                app:backgroundTintMode="screen"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/stalemate"
+                android:gravity="center|top"
+                android:text="@string/app_name"
+                android:textColor="@color/red_700"
+                android:textSize="40sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/btn_favorite"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
                 android:id="@+id/btn_favorite"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_marginEnd="16dp"
+                android:layout_width="64dp"
+                android:layout_height="0dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_heart"
-                app:layout_constraintBottom_toBottomOf="@+id/btn_search"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/btn_search" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
@@ -61,7 +52,7 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="25dp"
+        android:layout_height="24dp"
         android:background="@color/tab_color"
         app:tabTextAppearance="@style/customTabTitle"
         app:layout_constraintEnd_toEndOf="parent"
