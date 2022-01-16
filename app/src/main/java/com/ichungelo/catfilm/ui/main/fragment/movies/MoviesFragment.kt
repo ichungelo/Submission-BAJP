@@ -10,7 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ichungelo.catfilm.R
 import com.ichungelo.catfilm.databinding.FragmentMoviesBinding
-import com.ichungelo.catfilm.ui.search.SearchActivity
+import com.ichungelo.catfilm.ui.favorite.FavoriteActivity
+import com.ichungelo.catfilm.ui.search.movies.SearchMoviesActivity
 import com.ichungelo.catfilm.viewmodel.ViewModelFactory
 
 class MoviesFragment : Fragment(), View.OnClickListener {
@@ -38,9 +39,13 @@ class MoviesFragment : Fragment(), View.OnClickListener {
                 progressBarVisibility(false)
                 moviesAdapter.setMovies(movies)
             })
-            with(binding?.rvMovies) {
-                this?.layoutManager = GridLayoutManager(activity, 2)
-                this?.adapter = moviesAdapter
+            with(binding) {
+                if (this?.rvMovies != null) {
+                    rvMovies.layoutManager = GridLayoutManager(activity, 2)
+                    rvMovies.adapter = moviesAdapter
+                }
+                this?.btnSearchMovies?.setOnClickListener(this@MoviesFragment)
+                this?.btnMoviesFavorite?.setOnClickListener(this@MoviesFragment)
             }
         }
     }
@@ -57,8 +62,12 @@ class MoviesFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id) {
             R.id.btn_search_movies -> {
-                val searchActivityIntent = Intent(activity, SearchActivity::class.java)
+                val searchActivityIntent = Intent(activity, SearchMoviesActivity::class.java)
                 startActivity(searchActivityIntent)
+            }
+            R.id.btn_movies_favorite -> {
+                val favoriteActivityIntent = Intent(activity, FavoriteActivity::class.java)
+                startActivity(favoriteActivityIntent)
             }
         }
     }

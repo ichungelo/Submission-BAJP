@@ -1,16 +1,12 @@
 package com.ichungelo.catfilm.ui.main
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import com.google.android.material.tabs.TabLayoutMediator
-import com.ichungelo.catfilm.ui.favorite.FavoriteActivity
 import com.ichungelo.catfilm.R
 import com.ichungelo.catfilm.databinding.ActivityMainBinding
-import com.ichungelo.catfilm.ui.search.SearchActivity
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,10 +21,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             tab.setText(TAB_TITLE[position])
         }.attach()
         supportActionBar?.elevation = 0f
-
-        with(binding) {
-            btnFavorite.setOnClickListener(this@MainActivity)
-        }
     }
 
     companion object {
@@ -36,14 +28,5 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.string.movies,
             R.string.tv_shows
         )
-    }
-
-    override fun onClick(v: View?) {
-        when(v?.id) {
-            R.id.btn_favorite -> {
-                val favoriteActivityIntent = Intent(this, FavoriteActivity::class.java)
-                startActivity(favoriteActivityIntent)
-            }
-        }
     }
 }

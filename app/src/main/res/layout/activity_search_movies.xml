@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.search.SearchActivity">
+    tools:context=".ui.search.movies.SearchMoviesActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -21,7 +21,7 @@
             android:layout_height="match_parent">
 
             <ImageButton
-                android:id="@+id/btn_search_back"
+                android:id="@+id/btn_search_movies_back"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:background="@android:color/transparent"
@@ -32,20 +32,20 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <SearchView
-                android:id="@+id/search_bar"
+                android:id="@+id/sv_movies"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/bg_search"
                 android:closeIcon="@drawable/ic_x"
                 android:iconifiedByDefault="false"
-                android:queryHint="Search Movies.."
                 android:queryBackground="@android:color/transparent"
-                app:layout_constraintBottom_toBottomOf="@+id/btn_search_back"
+                android:queryHint="Search Movies.."
+                android:searchIcon="@drawable/ic_search"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_search_movies_back"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btn_search_back"
-                app:layout_constraintTop_toTopOf="@+id/btn_search_back"
-                android:searchIcon="@drawable/ic_search" />
+                app:layout_constraintStart_toEndOf="@+id/btn_search_movies_back"
+                app:layout_constraintTop_toTopOf="@+id/btn_search_movies_back" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -54,7 +54,8 @@
                 android:src="@drawable/bg_detail_slider"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="ContentDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>

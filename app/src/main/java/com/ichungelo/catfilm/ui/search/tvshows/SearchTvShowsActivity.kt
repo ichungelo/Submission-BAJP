@@ -1,4 +1,4 @@
-package com.ichungelo.catfilm.ui.search
+package com.ichungelo.catfilm.ui.search.tvshows
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
@@ -6,24 +6,24 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.ichungelo.catfilm.R
-import com.ichungelo.catfilm.databinding.ActivitySearchBinding
+import com.ichungelo.catfilm.databinding.ActivitySearchTvShowsBinding
 
-class SearchActivity : AppCompatActivity(), View.OnClickListener {
-    private lateinit var binding: ActivitySearchBinding
+class SearchTvShowsActivity : AppCompatActivity(), View.OnClickListener {
+    private lateinit var binding: ActivitySearchTvShowsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySearchBinding.inflate(layoutInflater)
+        binding = ActivitySearchTvShowsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         with(binding) {
-            btnSearchBack.setOnClickListener(this@SearchActivity)
-            showSoftKeyboard(searchBar)
+            btnSearchTvShowsBack.setOnClickListener(this@SearchTvShowsActivity)
+            showSoftKeyboard(svTvShows)
         }
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btn_search_back -> onBackPressed()
+            R.id.btn_search_tv_shows_back -> onBackPressed()
         }
     }
 
@@ -32,5 +32,4 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
         }
-    }
-}
+    }}

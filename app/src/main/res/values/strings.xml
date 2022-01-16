@@ -22,6 +22,12 @@
     <string name="favorite">Favorite</string>
     <string name="movie_category">movie</string>
     <string name="tv_category">tv</string>
-    <string name="search">Search</string>
+    <string name="favorite_button">favorite button</string>
+    <string name="app_logo">app logo</string>
+    <string name="go_to_favorites">go to favorites</string>
+    <string name="search_movies">Search Movies..</string>
+    <string name="search_tv_shows">Search Tv Shows..</string>
+    <string name="favorite_movies">Favorite Movies</string>
+    <string name="favorite_tv_shows">Favorite Tv Shows</string>
 
 </resources>

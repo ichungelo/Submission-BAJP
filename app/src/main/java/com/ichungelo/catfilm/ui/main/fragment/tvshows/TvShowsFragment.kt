@@ -1,6 +1,6 @@
 package com.ichungelo.catfilm.ui.main.fragment.tvshows
 
-import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,10 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import com.ichungelo.catfilm.R
 import com.ichungelo.catfilm.databinding.FragmentTvShowsBinding
+import com.ichungelo.catfilm.ui.favorite.FavoriteActivity
+import com.ichungelo.catfilm.ui.search.tvshows.SearchTvShowsActivity
 import com.ichungelo.catfilm.viewmodel.ViewModelFactory
 
-class TvShowsFragment : Fragment() {
+class TvShowsFragment : Fragment(), View.OnClickListener {
     private var _binding: FragmentTvShowsBinding? = null
     private val binding get() = _binding
 
@@ -34,9 +37,13 @@ class TvShowsFragment : Fragment() {
                 progressBarVisibility(false)
                 tvShowsAdapter.setTvShows(tvShows)
             })
-            with(binding?.rvTvShows) {
-                this?.layoutManager = GridLayoutManager(activity, 2)
-                this?.adapter = tvShowsAdapter
+            with(binding) {
+                if (this?.rvTvShows != null) {
+                    rvTvShows.layoutManager = GridLayoutManager(activity, 2)
+                    rvTvShows.adapter = tvShowsAdapter
+                }
+                this?.btnSearchTvShows?.setOnClickListener(this@TvShowsFragment)
+                this?.btnTvShowsFavorite?.setOnClickListener(this@TvShowsFragment)
             }
         }
     }
@@ -47,5 +54,18 @@ class TvShowsFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btn_search_tv_shows -> {
+                val searchActivityIntent = Intent(activity, SearchTvShowsActivity::class.java)
+                startActivity(searchActivityIntent)
+            }
+            R.id.btn_tv_shows_favorite -> {
+                val favoriteActivityIntent = Intent(activity, FavoriteActivity::class.java)
+                startActivity(favoriteActivityIntent)
+            }
+        }
     }
 }

@@ -4,8 +4,12 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 object DateHelper {
-    fun changeDateFormat(date: String): String {
-        val dateFormatOrigin = SimpleDateFormat("dd MMMM, yyyy (HH:mm:ss)", Locale.getDefault()).parse(date)
-        return SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(dateFormatOrigin!!)
+    fun changeDateFormat(date: String?): String {
+        var result = ""
+        if (date != null) {
+            val dateFormatOrigin = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(date)
+            result = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(dateFormatOrigin!!)
+        }
+        return result
     }
 }

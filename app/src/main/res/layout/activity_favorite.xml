@@ -62,7 +62,8 @@
         app:tabIndicatorAnimationMode="elastic"
         app:tabIndicatorColor="?android:attr/colorBackground"
         app:tabIndicatorGravity="stretch"
-        app:tabSelectedTextColor="@color/red_500"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/text_main"
         app:tabTextAppearance="@style/customTabTitle" />
 
     <androidx.viewpager2.widget.ViewPager2

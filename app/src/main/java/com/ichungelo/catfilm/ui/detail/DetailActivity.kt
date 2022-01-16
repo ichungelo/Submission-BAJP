@@ -13,8 +13,8 @@ import com.ichungelo.catfilm.databinding.ActivityDetailBinding
 import com.ichungelo.catfilm.data.DataEntity
 import com.ichungelo.catfilm.data.DetailEntity
 import com.ichungelo.catfilm.data.source.remote.response.GenreItems
+import com.ichungelo.catfilm.utils.DateHelper
 import com.ichungelo.catfilm.viewmodel.ViewModelFactory
-import java.text.SimpleDateFormat
 import java.util.*
 
 class DetailActivity : AppCompatActivity(), View.OnClickListener {
@@ -55,7 +55,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                         Intent.EXTRA_TEXT, """
                         CAT FILM
                         Title: ${dataDetail.title}
-                        Release Date: ${setDateFormat(dataDetail.releaseDate)}
+                        Release Date: ${DateHelper.changeDateFormat(dataDetail.releaseDate)}
                         Rating: ${dataDetail.voteAverage}
                         Genre: ${setGenreFormat(dataDetail.genres)}
                         Overview: ${dataDetail.overview}
@@ -82,7 +82,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                 isSelected = true
             }
             tvDetailHomepage.text = dataDetail.homepage
-            tvDetailYear.text = setDateFormat(dataDetail.releaseDate)
+            tvDetailYear.text = DateHelper.changeDateFormat(dataDetail.releaseDate)
             tvDetailGenre.text = setGenreFormat(dataDetail.genres)
             tvDetailOverview.text = dataDetail.overview
             tvDetailRating.text = dataDetail.voteAverage.toString()
@@ -104,21 +104,18 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         return result
     }
 
-    private fun setDateFormat(date: String?): String {
-        val dateFormatOrigin = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(date!!)
-        return SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(dateFormatOrigin!!)
-    }
-
     private fun setToolbarTitle(): String {
-        return if (category == resources.getString(R.string.movie_category))
-            resources.getString(R.string.movies)
-        else
-            resources.getString(R.string.tv_shows)
+        return when (category) {
+            resources.getString(R.string.movie_category) -> { resources.getString(R.string.movies) }
+            resources.getString(R.string.tv_category) -> { resources.getString(R.string.tv_shows) }
+            else -> { "" }
+        }
     }
 
     private fun imageGlider(path: String?, view: ImageView) {
         Glide.with(this@DetailActivity)
             .load("${BuildConfig.IMAGE_URL}t/p/w500/${path}")
+            .placeholder(R.drawable.bg_gradient)
             .into(view)
     }
 

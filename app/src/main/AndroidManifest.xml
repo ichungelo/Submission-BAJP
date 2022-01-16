@@ -17,7 +17,10 @@
             android:exported="false"
             android:windowSoftInputMode="stateAlwaysVisible|adjustResize"/>
         <activity
-            android:name=".ui.search.SearchActivity"
+            android:name=".ui.search.movies.SearchMoviesActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.search.tvshows.SearchTvShowsActivity"
             android:exported="false"/>
         <activity
             android:name=".ui.splash.SplashActivity"

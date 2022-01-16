@@ -22,4 +22,10 @@ interface ApiService {
     @GET("tv/{dataId}")
     fun getDetailTvShow(@Path("dataId") dataId: String, @Query("api_key")api_key: String): Call<DetailTvResponse>
 
+    @GET("search/movie")
+    fun getSearchMovies(@Query("query") query: String): Call<DiscoverMovieResponse>
+
+    @GET("search/tv")
+    fun getSearchTvShows(@Query("query") query: String): Call<DiscoverTvResponse>
+
 }

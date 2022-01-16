@@ -2,11 +2,9 @@ package com.ichungelo.catfilm.ui.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.WindowInsets
+import android.view.WindowManager
 import com.ichungelo.catfilm.databinding.ActivitySplashBinding
 import com.ichungelo.catfilm.ui.main.MainActivity
 
@@ -17,15 +15,13 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val splashStatusBarColor = Color.rgb(211, 47, 47)
-        val splashNavigationBarColor = Color.rgb(211, 47, 47)
 
         with(window) {
-            statusBarColor = splashStatusBarColor
-            navigationBarColor = splashNavigationBarColor
+            setFlags(
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+            )
         }
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
-
 
         sleepSplash()
     }

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ichungelo.catfilm.BuildConfig
+import com.ichungelo.catfilm.R
 import com.ichungelo.catfilm.databinding.ItemsPosterBinding
 import com.ichungelo.catfilm.data.DataEntity
 import com.ichungelo.catfilm.ui.detail.DetailActivity
@@ -32,6 +33,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
                 tvTitlePoster.text = movie.title
                 Glide.with(itemView.context)
                     .load("${BuildConfig.IMAGE_URL}t/p/w500${movie.posterPath}")
+                    .placeholder(R.drawable.bg_gradient)
                     .into(imgPoster)
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailActivity::class.java)
