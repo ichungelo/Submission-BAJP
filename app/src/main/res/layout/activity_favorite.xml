@@ -40,7 +40,7 @@
                 android:fontFamily="@font/ubuntu_medium"
                 android:gravity="center"
                 android:text="@string/favorite"
-                android:textColor="@color/red_700"
+                android:textColor="@color/text_main"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

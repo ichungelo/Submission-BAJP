@@ -20,18 +20,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
+            <ImageView
                 android:id="@+id/tv_favorite_toolbar"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="44dp"
                 android:layout_marginStart="64dp"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/stalemate"
+                android:src="@drawable/ic_logo_gradient"
                 android:gravity="center|top"
-                android:text="@string/app_name"
-                android:textColor="@color/red_700"
-                android:textSize="40sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/btn_favorite"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -61,8 +57,9 @@
         app:tabIndicator="@drawable/bg_toolbar"
         app:tabIndicatorColor="?android:attr/colorBackground"
         app:tabIndicatorAnimationMode="elastic"
+        app:tabMode="scrollable"
         app:tabIndicatorGravity="stretch"
-        app:tabSelectedTextColor="@color/red_500" />
+        app:tabSelectedTextColor="@color/text_main" />
 
 
     <androidx.viewpager2.widget.ViewPager2
