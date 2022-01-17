@@ -13,7 +13,7 @@ import java.util.*
 object Helper {
     fun changeDateFormat(date: String?): String {
         var result = ""
-        if (date != null) {
+        if (!date.isNullOrEmpty()) {
             val dateFormatOrigin = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(date)
             result = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(dateFormatOrigin!!)
         }
@@ -22,7 +22,7 @@ object Helper {
 
     fun getReleaseYear(date: String?): String {
         var result = ""
-        if (date != null) {
+        if (!date.isNullOrEmpty()) {
             val dateFormatOrigin = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(date)
             result = SimpleDateFormat("yyyy", Locale.getDefault()).format(dateFormatOrigin!!)
         }

@@ -5,13 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ichungelo.catfilm.R
 import com.ichungelo.catfilm.databinding.ActivitySearchTvShowsBinding
 import com.ichungelo.catfilm.viewmodel.ViewModelFactory
 
-class SearchTvShowsActivity : AppCompatActivity(), View.OnClickListener {
+class SearchTvShowsActivity : AppCompatActivity(), View.OnClickListener,
+    SearchView.OnQueryTextListener {
     private lateinit var binding: ActivitySearchTvShowsBinding
     private lateinit var viewModel: SearchTvShowsViewModel
     private lateinit var adapter: SearchTvShowsAdapter
@@ -24,11 +26,9 @@ class SearchTvShowsActivity : AppCompatActivity(), View.OnClickListener {
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[SearchTvShowsViewModel::class.java]
         adapter = SearchTvShowsAdapter()
-        viewModel.getSearchTvShows().observe(this, { result ->
-            adapter.setSearchTvShows(result)
-        })
 
         with(binding) {
+            svTvShows.setOnQueryTextListener(this@SearchTvShowsActivity)
             rvSearchTvShows.layoutManager = LinearLayoutManager(this@SearchTvShowsActivity)
             rvSearchTvShows.adapter = adapter
             btnSearchTvShowsBack.setOnClickListener(this@SearchTvShowsActivity)
@@ -47,4 +47,18 @@ class SearchTvShowsActivity : AppCompatActivity(), View.OnClickListener {
             val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
         }
-    }}
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        query?.let {
+            viewModel.getSearchTvShows(it).observe(this, { result ->
+                adapter.setSearchTvShows(result)
+            })
+        }
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        return false
+    }
+}

@@ -4,9 +4,5 @@ import androidx.lifecycle.ViewModel
 import com.ichungelo.catfilm.data.source.TmdbRepository
 
 class SearchTvShowsViewModel(private val tmdbRepository: TmdbRepository): ViewModel() {
-    fun getSearchTvShows() = tmdbRepository.getSearchTvShows("man")
-
-    companion object {
-        const val DATA_QUERY = ""
-    }
+    fun getSearchTvShows(query: String) = tmdbRepository.getSearchTvShows(query)
 }
