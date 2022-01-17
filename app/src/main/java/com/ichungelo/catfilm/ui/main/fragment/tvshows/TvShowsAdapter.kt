@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.ichungelo.catfilm.BuildConfig
 import com.ichungelo.catfilm.R
 import com.ichungelo.catfilm.databinding.ItemsPosterBinding
@@ -13,6 +14,7 @@ import com.ichungelo.catfilm.data.DataEntity
 import com.ichungelo.catfilm.ui.detail.DetailActivity
 import com.ichungelo.catfilm.ui.detail.DetailViewModel.Companion.TV_SHOW
 import com.ichungelo.catfilm.utils.DiffCallback
+import com.ichungelo.catfilm.utils.Helper
 
 class TvShowsAdapter : RecyclerView.Adapter<TvShowsAdapter.TvShowsViewHolder>() {
     private val listTvShows = ArrayList<DataEntity>()
@@ -31,10 +33,7 @@ class TvShowsAdapter : RecyclerView.Adapter<TvShowsAdapter.TvShowsViewHolder>() 
         fun bind(tvShow: DataEntity) {
             with(binding) {
                 tvTitlePoster.text = tvShow.title
-                Glide.with(itemView.context)
-                    .load("${BuildConfig.IMAGE_URL}t/p/w500${tvShow.posterPath}")
-                    .placeholder(R.drawable.bg_gradient)
-                    .into(imgPoster)
+                Helper.imageGlider(itemView.context, tvShow.posterPath, imgPoster)
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailActivity::class.java)
                     intent.putExtra(DetailActivity.EXTRA_DATA, tvShow)

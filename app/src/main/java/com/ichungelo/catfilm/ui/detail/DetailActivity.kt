@@ -4,16 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
-import com.ichungelo.catfilm.BuildConfig
 import com.ichungelo.catfilm.R
 import com.ichungelo.catfilm.databinding.ActivityDetailBinding
 import com.ichungelo.catfilm.data.DataEntity
 import com.ichungelo.catfilm.data.DetailEntity
 import com.ichungelo.catfilm.data.source.remote.response.GenreItems
-import com.ichungelo.catfilm.utils.DateHelper
+import com.ichungelo.catfilm.utils.Helper
 import com.ichungelo.catfilm.viewmodel.ViewModelFactory
 import java.util.*
 
@@ -55,7 +52,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                         Intent.EXTRA_TEXT, """
                         CAT FILM
                         Title: ${dataDetail.title}
-                        Release Date: ${DateHelper.changeDateFormat(dataDetail.releaseDate)}
+                        Release Date: ${Helper.changeDateFormat(dataDetail.releaseDate)}
                         Rating: ${dataDetail.voteAverage}
                         Genre: ${setGenreFormat(dataDetail.genres)}
                         Overview: ${dataDetail.overview}
@@ -82,7 +79,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                 isSelected = true
             }
             tvDetailHomepage.text = dataDetail.homepage
-            tvDetailYear.text = DateHelper.changeDateFormat(dataDetail.releaseDate)
+            tvDetailYear.text = Helper.changeDateFormat(dataDetail.releaseDate)
             tvDetailGenre.text = setGenreFormat(dataDetail.genres)
             tvDetailOverview.text = dataDetail.overview
             tvDetailRating.text = dataDetail.voteAverage.toString()
@@ -91,8 +88,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                 isSelected = true
             }
             tvDetailToolbar.text = setToolbarTitle()
-            imageGlider(dataDetail.posterPath, imgDetailPoster)
-            imageGlider(dataDetail.backdropPath, imgDetailBackdrop)
+            Helper.imageGlider(this@DetailActivity, dataDetail.posterPath, imgDetailPoster)
+            Helper.imageGlider(this@DetailActivity, dataDetail.backdropPath, imgDetailBackdrop)
         }
     }
 
@@ -110,13 +107,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
             resources.getString(R.string.tv_category) -> { resources.getString(R.string.tv_shows) }
             else -> { "" }
         }
-    }
-
-    private fun imageGlider(path: String?, view: ImageView) {
-        Glide.with(this@DetailActivity)
-            .load("${BuildConfig.IMAGE_URL}t/p/w500/${path}")
-            .placeholder(R.drawable.bg_gradient)
-            .into(view)
     }
 
     private fun progressBarVisibility(isLoading: Boolean) {
