@@ -8,4 +8,5 @@ data class DataEntity(
     var id: Int? = null,
     var title: String? = null,
     var posterPath: String? = null,
+    var releaseDate: String? = null
 ) : Parcelable

@@ -13,18 +13,37 @@ class RemoteDataSource {
 
     fun getAllMovies(callback: LoadMoviesCallback) {
         EspressoIdlingResource.increment()
-        val client = ApiConfig.getApiService().getDiscoverMovies(API_KEY)
-        client.enqueue(object : Callback<DiscoverMovieResponse> {
+        val client = ApiConfig.getApiService().getAllMovies(API_KEY)
+        client.enqueue(object : Callback<AllMovieResponse> {
             override fun onResponse(
-                call: Call<DiscoverMovieResponse>,
-                response: Response<DiscoverMovieResponse>
+                call: Call<AllMovieResponse>,
+                response: Response<AllMovieResponse>
             ) {
                 callback.onAllMoviesReceived(response.body()?.results)
                 EspressoIdlingResource.decrement()
             }
 
-            override fun onFailure(call: Call<DiscoverMovieResponse>, t: Throwable) {
+            override fun onFailure(call: Call<AllMovieResponse>, t: Throwable) {
                 Log.e(TAG, "getAllMovies onFailure : ${t.message}")
+                EspressoIdlingResource.decrement()
+            }
+        })
+    }
+
+    fun getSearchMovies(callback: LoadSearchMoviesCallback, query: String) {
+        EspressoIdlingResource.increment()
+        val client = ApiConfig.getApiService().getSearchMovies(query ,API_KEY)
+        client.enqueue(object : Callback<AllMovieResponse> {
+            override fun onResponse(
+                call: Call<AllMovieResponse>,
+                response: Response<AllMovieResponse>
+            ) {
+                callback.onSearchMoviesReceived(response.body()?.results)
+                EspressoIdlingResource.decrement()
+            }
+
+            override fun onFailure(call: Call<AllMovieResponse>, t: Throwable) {
+                Log.e(TAG, "getSearchMovies onFailure : ${t.message}")
                 EspressoIdlingResource.decrement()
             }
         })
@@ -52,18 +71,37 @@ class RemoteDataSource {
 
     fun getAllTvShows(callback: LoadTvShowsCallback) {
         EspressoIdlingResource.increment()
-        val client = ApiConfig.getApiService().getDiscoverTvShows(API_KEY)
-        client.enqueue(object : Callback<DiscoverTvResponse> {
+        val client = ApiConfig.getApiService().getAllTvShows(API_KEY)
+        client.enqueue(object : Callback<AllTvResponse> {
             override fun onResponse(
-                call: Call<DiscoverTvResponse>,
-                response: Response<DiscoverTvResponse>
+                call: Call<AllTvResponse>,
+                response: Response<AllTvResponse>
             ) {
                 callback.onAllTvShowsReceived(response.body()?.results)
                 EspressoIdlingResource.decrement()
             }
 
-            override fun onFailure(call: Call<DiscoverTvResponse>, t: Throwable) {
+            override fun onFailure(call: Call<AllTvResponse>, t: Throwable) {
                 Log.e(TAG, "getAllTvShows onFailure : ${t.message}")
+                EspressoIdlingResource.decrement()
+            }
+        })
+    }
+
+    fun getSearchTvShows(callback: LoadSearchTvShowsCallback, query: String) {
+        EspressoIdlingResource.increment()
+        val client = ApiConfig.getApiService().getSearchTvShows(query ,API_KEY)
+        client.enqueue(object : Callback<AllTvResponse> {
+            override fun onResponse(
+                call: Call<AllTvResponse>,
+                response: Response<AllTvResponse>
+            ) {
+                callback.onSearchTvShowsReceived(response.body()?.results)
+                EspressoIdlingResource.decrement()
+            }
+
+            override fun onFailure(call: Call<AllTvResponse>, t: Throwable) {
+                Log.e(TAG, "getSearchTvShows onFailure : ${t.message}")
                 EspressoIdlingResource.decrement()
             }
         })
@@ -103,7 +141,14 @@ class RemoteDataSource {
 
     interface LoadDetailTvShowCallback {
         fun onDetailTvShowReceived(detailTvResponse: DetailTvResponse?)
+    }
 
+    interface LoadSearchMoviesCallback {
+        fun onSearchMoviesReceived(searchMovieResponse: List<MovieItems>?)
+    }
+
+    interface LoadSearchTvShowsCallback {
+        fun onSearchTvShowsReceived(searchTvResponse: List<TvItems>?)
     }
 
     companion object {

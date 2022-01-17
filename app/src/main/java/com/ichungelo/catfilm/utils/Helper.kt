@@ -20,6 +20,15 @@ object Helper {
         return result
     }
 
+    fun getReleaseYear(date: String?): String {
+        var result = ""
+        if (date != null) {
+            val dateFormatOrigin = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(date)
+            result = SimpleDateFormat("yyyy", Locale.getDefault()).format(dateFormatOrigin!!)
+        }
+        return result
+    }
+
     fun imageGlider(context: Context, path: String?, view: ImageView) {
         Glide.with(context)
             .load("${BuildConfig.IMAGE_URL}t/p/w500/${path}")

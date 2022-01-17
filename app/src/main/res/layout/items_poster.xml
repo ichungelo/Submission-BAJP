@@ -43,11 +43,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
+            <TextView
+                android:id="@+id/tv_year_poster"
+                android:layout_width="56dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_year"
+                android:gravity="center"
+                android:padding="4dp"
+                android:textColor="@color/text_main"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/dummy_year" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.cardview.widget.CardView>
-
-
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

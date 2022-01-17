@@ -8,6 +8,8 @@ import com.ichungelo.catfilm.di.Injection
 import com.ichungelo.catfilm.ui.detail.DetailViewModel
 import com.ichungelo.catfilm.ui.main.fragment.movies.MoviesViewModel
 import com.ichungelo.catfilm.ui.main.fragment.tvshows.TvShowsViewModel
+import com.ichungelo.catfilm.ui.search.movies.SearchMoviesViewModel
+import com.ichungelo.catfilm.ui.search.tvshows.SearchTvShowsViewModel
 
 class ViewModelFactory private constructor(private val tmdbRepository: TmdbRepository) :
     ViewModelProvider.NewInstanceFactory() {
@@ -22,6 +24,12 @@ class ViewModelFactory private constructor(private val tmdbRepository: TmdbRepos
             }
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(tmdbRepository) as T
+            }
+            modelClass.isAssignableFrom(SearchMoviesViewModel::class.java) -> {
+                SearchMoviesViewModel(tmdbRepository) as T
+            }
+            modelClass.isAssignableFrom(SearchTvShowsViewModel::class.java) -> {
+                SearchTvShowsViewModel(tmdbRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

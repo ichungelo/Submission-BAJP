@@ -5,17 +5,32 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ichungelo.catfilm.R
 import com.ichungelo.catfilm.databinding.ActivitySearchTvShowsBinding
+import com.ichungelo.catfilm.viewmodel.ViewModelFactory
 
 class SearchTvShowsActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivitySearchTvShowsBinding
+    private lateinit var viewModel: SearchTvShowsViewModel
+    private lateinit var adapter: SearchTvShowsAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchTvShowsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val factory = ViewModelFactory.getInstance(this)
+        viewModel = ViewModelProvider(this, factory)[SearchTvShowsViewModel::class.java]
+        adapter = SearchTvShowsAdapter()
+        viewModel.getSearchTvShows().observe(this, { result ->
+            adapter.setSearchTvShows(result)
+        })
+
         with(binding) {
+            rvSearchTvShows.layoutManager = LinearLayoutManager(this@SearchTvShowsActivity)
+            rvSearchTvShows.adapter = adapter
             btnSearchTvShowsBack.setOnClickListener(this@SearchTvShowsActivity)
             showSoftKeyboard(svTvShows)
         }

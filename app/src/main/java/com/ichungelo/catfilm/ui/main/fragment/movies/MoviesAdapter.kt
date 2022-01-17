@@ -33,6 +33,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
         fun bind(movie: DataEntity) {
             with(binding) {
                 tvTitlePoster.text = movie.title
+                tvYearPoster.text = Helper.getReleaseYear(movie.releaseDate)
                 Helper.imageGlider(itemView.context, movie.posterPath, imgPoster)
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailActivity::class.java)

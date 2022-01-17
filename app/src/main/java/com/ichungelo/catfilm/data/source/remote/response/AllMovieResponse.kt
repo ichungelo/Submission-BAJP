@@ -2,23 +2,26 @@ package com.ichungelo.catfilm.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class DiscoverTvResponse(
+data class AllMovieResponse(
     @field:SerializedName("results")
-    var results: List<TvItems>? = null
+    var results: List<MovieItems>? = null
 )
 
-data class TvItems(
+data class MovieItems(
     @field:SerializedName("id")
     var id: Int? = null,
 
-    @field:SerializedName("name")
+    @field:SerializedName("title")
     var title: String? = null,
 
     @field:SerializedName("poster_path")
     var posterPath: String? = null,
+
+    @field:SerializedName("release_date")
+    var releaseDate: String? = null,
 )
 
-data class DetailTvResponse(
+data class DetailMovieResponse(
     @field:SerializedName("genres")
     var genres: List<GenreItems>? = null,
 
@@ -31,7 +34,7 @@ data class DetailTvResponse(
     @field:SerializedName("id")
     var id: Int? = null,
 
-    @field:SerializedName("name")
+    @field:SerializedName("title")
     var title: String? = null,
 
     @field:SerializedName("overview")
@@ -46,7 +49,6 @@ data class DetailTvResponse(
     @field:SerializedName("vote_average")
     var voteAverage: Double? = null,
 
-    @field:SerializedName("first_air_date")
+    @field:SerializedName("release_date")
     var releaseDate: String? = null
-
 )

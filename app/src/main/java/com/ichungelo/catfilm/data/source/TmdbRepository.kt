@@ -18,7 +18,7 @@ class TmdbRepository private constructor(private val remoteDataSource: RemoteDat
                 if (discoverMovieResponse != null) {
                     for (response in discoverMovieResponse) {
                         with(response) {
-                            val movieItems = DataEntity(id, title, posterPath)
+                            val movieItems = DataEntity(id, title, posterPath, releaseDate)
                             movieList.add(movieItems)
                         }
                     }
@@ -27,6 +27,25 @@ class TmdbRepository private constructor(private val remoteDataSource: RemoteDat
             }
         })
         return discoverMoviesResult
+    }
+
+    override fun getSearchMovies(query: String): LiveData<List<DataEntity>> {
+        val searchMoviesResult = MutableLiveData<List<DataEntity>>()
+        remoteDataSource.getSearchMovies(object : RemoteDataSource.LoadSearchMoviesCallback {
+            override fun onSearchMoviesReceived(searchMovieResponse: List<MovieItems>?) {
+                val movieList = ArrayList<DataEntity>()
+                if (searchMovieResponse != null) {
+                    for (response in searchMovieResponse) {
+                        with(response) {
+                            val movieItems = DataEntity(id, title, posterPath, releaseDate)
+                            movieList.add(movieItems)
+                        }
+                    }
+                    searchMoviesResult.postValue(movieList)
+                }
+            }
+        }, query)
+        return searchMoviesResult
     }
 
     override fun getDetailMovie(dataId: String): LiveData<DetailEntity> {
@@ -60,19 +79,38 @@ class TmdbRepository private constructor(private val remoteDataSource: RemoteDat
         val discoverTvShowsResult = MutableLiveData<List<DataEntity>>()
         remoteDataSource.getAllTvShows(object : RemoteDataSource.LoadTvShowsCallback {
             override fun onAllTvShowsReceived(discoverTvResponse: List<TvItems>?) {
-                val movieList = ArrayList<DataEntity>()
+                val tvShowList = ArrayList<DataEntity>()
                 if (discoverTvResponse != null) {
                     for (response in discoverTvResponse) {
                         with(response) {
-                            val movieItems = DataEntity(id, title, posterPath)
-                            movieList.add(movieItems)
+                            val movieItems = DataEntity(id, title, posterPath, releaseDate)
+                            tvShowList.add(movieItems)
                         }
                     }
-                    discoverTvShowsResult.postValue(movieList)
+                    discoverTvShowsResult.postValue(tvShowList)
                 }
             }
         })
         return discoverTvShowsResult
+    }
+
+    override fun getSearchTvShows(query: String): LiveData<List<DataEntity>> {
+        val searchTvShowsResult = MutableLiveData<List<DataEntity>>()
+        remoteDataSource.getSearchTvShows(object : RemoteDataSource.LoadSearchTvShowsCallback {
+            override fun onSearchTvShowsReceived(searchTvResponse: List<TvItems>?) {
+                val tvShowList = ArrayList<DataEntity>()
+                if (searchTvResponse != null) {
+                    for (response in searchTvResponse) {
+                        with(response) {
+                            val tvShowItems = DataEntity(id, title, posterPath, releaseDate)
+                            tvShowList.add(tvShowItems)
+                        }
+                    }
+                    searchTvShowsResult.postValue(tvShowList)
+                }
+            }
+        }, query)
+        return searchTvShowsResult
     }
 
     override fun getDetailTvShow(dataId: String): LiveData<DetailEntity> {

@@ -2,8 +2,6 @@
 <resources>
     <color name="red_500">#F44336</color>
     <color name="red_700">#D32F2F</color>
-    <color name="yellow_400">#FFA726</color>
-    <color name="yellow_700">#F57C00</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="text_main">#FFFFFFFF</color>
