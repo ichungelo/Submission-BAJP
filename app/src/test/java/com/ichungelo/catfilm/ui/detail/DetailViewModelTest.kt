@@ -40,13 +40,12 @@ class DetailViewModelTest {
 
     @Test
     fun getDetailMovie() {
-        viewModel.setDataId(movieDataId)
 
         val movie = MutableLiveData<DetailEntity>()
         movie.value = selectedMovie
 
         Mockito.`when`(tmdbRepository.getDetailMovie(movieDataId)).thenReturn(movie)
-        val movieEntity = viewModel.getDetailData("Movies").value as DetailEntity
+        val movieEntity = viewModel.getDetailMovie(movieDataId).value as DetailEntity
         Mockito.verify(tmdbRepository).getDetailMovie(movieDataId)
         assertNotNull(movieEntity)
         assertNotNull(movieEntity.id)
@@ -70,19 +69,17 @@ class DetailViewModelTest {
         assertEquals(selectedMovie.overview, movieEntity.overview)
         assertEquals(selectedMovie.voteAverage, movieEntity.voteAverage)
 
-        viewModel.getDetailData("Movies").observeForever(detailObserver)
+        viewModel.getDetailMovie(movieDataId).observeForever(detailObserver)
         verify(detailObserver).onChanged(selectedMovie)
     }
 
     @Test
     fun getDetailTvShow() {
-        viewModel.setDataId(tvShowDataId)
-
         val tvShow = MutableLiveData<DetailEntity>()
         tvShow.value = selectedTvShow
 
         Mockito.`when`(tmdbRepository.getDetailTvShow(tvShowDataId)).thenReturn(tvShow)
-        val tvShowEntity = viewModel.getDetailData("Tv Shows").value
+        val tvShowEntity = viewModel.getDetailTvShow(tvShowDataId).value
         Mockito.verify(tmdbRepository).getDetailTvShow(tvShowDataId)
         assertNotNull(tvShowEntity)
         assertNotNull(tvShowEntity?.id)
@@ -106,7 +103,7 @@ class DetailViewModelTest {
         assertEquals(selectedTvShow.overview, tvShowEntity?.overview)
         assertEquals(selectedTvShow.voteAverage, tvShowEntity?.voteAverage)
 
-        viewModel.getDetailData("Tv Shows").observeForever(detailObserver)
+        viewModel.getDetailTvShow(tvShowDataId).observeForever(detailObserver)
         verify(detailObserver).onChanged(selectedTvShow)
 
     }

@@ -30,5 +30,6 @@
     <string name="favorite_movies">Favorite Movies</string>
     <string name="favorite_tv_shows">Favorite Tv Shows</string>
     <string name="dummy_year">2018</string>
+    <string name="sort_button">sort button</string>
 
 </resources>

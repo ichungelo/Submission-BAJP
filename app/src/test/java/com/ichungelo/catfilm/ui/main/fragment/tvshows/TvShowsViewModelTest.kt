@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
 import com.ichungelo.catfilm.data.TmdbRepository
+import com.ichungelo.catfilm.data.source.local.entity.TvEntity
 import com.ichungelo.catfilm.utils.DataDummy
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.*
@@ -29,7 +30,7 @@ class TvShowsViewModelTest {
     private lateinit var tmdbRepository: TmdbRepository
 
     @Mock
-    private lateinit var tvShowObserver: Observer<List<MovieEntity>>
+    private lateinit var tvShowObserver: Observer<List<TvEntity>>
 
     @Before
     fun setUp() {
@@ -38,11 +39,11 @@ class TvShowsViewModelTest {
 
     @Test
     fun getTvShows() {
-        val allTvShows = MutableLiveData<List<MovieEntity>>()
+        val allTvShows = MutableLiveData<List<TvEntity>>()
         allTvShows.value = dummyAllTvShows
 
         Mockito.`when`(tmdbRepository.getTvShows()).thenReturn(allTvShows)
-        val tvShowEntities = viewModel.getTvShows().value as List<MovieEntity>
+        val tvShowEntities = viewModel.getTvShows().value as List<TvEntity>
         Mockito.verify(tmdbRepository).getTvShows()
         assertNotNull(tvShowEntities)
         for (index in tvShowEntities.indices) {

@@ -2,6 +2,7 @@ package com.ichungelo.catfilm.utils
 
 import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
 import com.ichungelo.catfilm.data.source.local.entity.DetailEntity
+import com.ichungelo.catfilm.data.source.local.entity.TvEntity
 import com.ichungelo.catfilm.data.source.remote.response.*
 import kotlin.collections.ArrayList
 
@@ -55,11 +56,11 @@ object DataDummy {
         )
     }
 
-    fun generateDataTvShows(): List<MovieEntity> {
-        val allDataTvShows = ArrayList<MovieEntity>()
+    fun generateDataTvShows(): List<TvEntity> {
+        val allDataTvShows = ArrayList<TvEntity>()
 
         allDataTvShows.add(
-            MovieEntity(
+            TvEntity(
                 77169,
                 "Cobra Kai",
                 "/6POBWybSBDBKjSs1VAQcnQC1qyt.jpg"
@@ -67,7 +68,7 @@ object DataDummy {
         )
 
         allDataTvShows.add(
-            MovieEntity(
+            TvEntity(
                 115036,
                 "The Book of Boba Fett",
                 "/gNbdjDi1HamTCrfvM9JeA94bNi2.jpg"
@@ -75,7 +76,7 @@ object DataDummy {
         )
 
         allDataTvShows.add(
-            MovieEntity(
+            TvEntity(
                 71914,
                 "The Wheel of Time",
                 "/mpgDeLhl8HbhI03XLB7iKO6M6JE.jpg"

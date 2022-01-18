@@ -1,6 +1,7 @@
 package com.ichungelo.catfilm.data.source
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.ichungelo.catfilm.data.source.local.LocalDataSource
 import com.ichungelo.catfilm.data.source.remote.RemoteDataSource
 import com.ichungelo.catfilm.utils.DataDummy
 import com.ichungelo.catfilm.utils.LiveDataTestUtils
@@ -19,7 +20,8 @@ class TmdbRepositoryTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private var remote = mock(RemoteDataSource::class.java)
-    private var repository = FakeTmdbRepository(remote)
+    private var local = mock(LocalDataSource::class.java)
+    private var repository = FakeTmdbRepository(remote, local)
 
     private val discoverMovieResponses = DataDummy.generateRemoteDataMovies()
     private val movieId = discoverMovieResponses[0].id.toString()
