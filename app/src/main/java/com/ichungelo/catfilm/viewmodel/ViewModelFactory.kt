@@ -3,7 +3,7 @@ package com.ichungelo.catfilm.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.ichungelo.catfilm.data.source.TmdbRepository
+import com.ichungelo.catfilm.data.TmdbRepository
 import com.ichungelo.catfilm.di.Injection
 import com.ichungelo.catfilm.ui.detail.DetailViewModel
 import com.ichungelo.catfilm.ui.main.fragment.movies.MoviesViewModel
@@ -42,7 +42,7 @@ class ViewModelFactory private constructor(private val tmdbRepository: TmdbRepos
 
         fun getInstance(context: Context): ViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(Injection.provideRepository()).apply {
+                instance ?: ViewModelFactory(Injection.provideRepository(context)).apply {
                     instance = this
                 }
             }

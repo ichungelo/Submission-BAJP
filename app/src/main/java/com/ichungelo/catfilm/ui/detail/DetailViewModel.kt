@@ -2,26 +2,25 @@ package com.ichungelo.catfilm.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.ichungelo.catfilm.data.DetailEntity
-import com.ichungelo.catfilm.data.source.TmdbRepository
+import com.ichungelo.catfilm.data.source.local.entity.DetailEntity
+import com.ichungelo.catfilm.data.TmdbRepository
+import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
+import com.ichungelo.catfilm.data.source.local.entity.TvEntity
 
 class DetailViewModel(private val tmdbRepository: TmdbRepository) : ViewModel() {
-    private lateinit var dataId: String
+    fun getDetailMovie(movieId: String) = tmdbRepository.getDetailMovie(movieId)
 
-    fun setDataId(dataId: String) {
-        this.dataId = dataId
-    }
+    fun getDetailTvShow(tvId: String) = tmdbRepository.getDetailTvShow(tvId)
 
-    fun getDetailData(from: String?): LiveData<DetailEntity> {
-        return if(MOVIE == from) {
-            tmdbRepository.getDetailMovie(dataId)
-        } else {
-            tmdbRepository.getDetailTvShow(dataId)
-        }
-    }
+    fun getMovieById(id: String) = tmdbRepository.getMovieById(id)
 
-    companion object {
-        const val MOVIE = "movie"
-        const val TV_SHOW = "tv"
-    }
+    fun insertMovieFavorite(movie: MovieEntity) = tmdbRepository.insertMovieFavorite(movie)
+
+    fun deleteMovieFavorite(movie: MovieEntity) = tmdbRepository.deleteMovieFavorite(movie)
+
+    fun getTvById(id: String) = tmdbRepository.getTvById(id)
+
+    fun insertTvFavorite(tvShow: TvEntity) = tmdbRepository.insertTvFavorite(tvShow)
+
+    fun deleteTvFavorite(tvShow: TvEntity) = tmdbRepository.deleteTvFavorite(tvShow)
 }

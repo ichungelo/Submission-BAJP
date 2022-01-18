@@ -3,8 +3,8 @@ package com.ichungelo.catfilm.ui.detail
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.ichungelo.catfilm.data.DetailEntity
-import com.ichungelo.catfilm.data.source.TmdbRepository
+import com.ichungelo.catfilm.data.source.local.entity.DetailEntity
+import com.ichungelo.catfilm.data.TmdbRepository
 import com.ichungelo.catfilm.utils.DataDummy
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.*

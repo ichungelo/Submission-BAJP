@@ -5,20 +5,21 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.ichungelo.catfilm.data.DataEntity
+import com.ichungelo.catfilm.data.source.local.entity.TvEntity
 import com.ichungelo.catfilm.databinding.ItemsResultBinding
 import com.ichungelo.catfilm.ui.detail.DetailActivity
 import com.ichungelo.catfilm.ui.detail.DetailViewModel
-import com.ichungelo.catfilm.utils.DiffCallback
+import com.ichungelo.catfilm.utils.MovieDiffCallback
 import com.ichungelo.catfilm.utils.Helper
+import com.ichungelo.catfilm.utils.TvShowDiffCallback
 
 
 class SearchTvShowsAdapter : RecyclerView.Adapter<SearchTvShowsAdapter.SearchTvShowsViewHolder>() {
-    private val listSearchTvShows = ArrayList<DataEntity>()
+    private val listSearchTvShows = ArrayList<TvEntity>()
 
-    fun setSearchTvShows(tvShows: List<DataEntity>?) {
+    fun setSearchTvShows(tvShows: List<TvEntity>?) {
         if (tvShows == null) return
-        val diffCallback = DiffCallback(this.listSearchTvShows, tvShows)
+        val diffCallback = TvShowDiffCallback(this.listSearchTvShows, tvShows)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         this.listSearchTvShows.clear()
         this.listSearchTvShows.addAll(tvShows)
@@ -27,15 +28,14 @@ class SearchTvShowsAdapter : RecyclerView.Adapter<SearchTvShowsAdapter.SearchTvS
 
     class SearchTvShowsViewHolder(private val binding: ItemsResultBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(tvShow: DataEntity) {
+        fun bind(tvShow: TvEntity) {
             with(binding) {
                 tvResultTitle.text = tvShow.title
                 tvResultReleraseDate.text = Helper.changeDateFormat(tvShow.releaseDate)
                 Helper.imageGlider(itemView.context, tvShow.posterPath, imgResult)
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailActivity::class.java)
-                    intent.putExtra(DetailActivity.EXTRA_DATA, tvShow)
-                    intent.putExtra(DetailActivity.EXTRA_CATEGORY, DetailViewModel.TV_SHOW)
+                    intent.putExtra(DetailActivity.EXTRA_TV, tvShow)
                     itemView.context.startActivity(intent)
                 }
             }

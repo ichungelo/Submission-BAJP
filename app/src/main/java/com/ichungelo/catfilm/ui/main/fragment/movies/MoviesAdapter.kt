@@ -5,23 +5,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.ichungelo.catfilm.BuildConfig
-import com.ichungelo.catfilm.R
 import com.ichungelo.catfilm.databinding.ItemsPosterBinding
-import com.ichungelo.catfilm.data.DataEntity
+import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
 import com.ichungelo.catfilm.ui.detail.DetailActivity
-import com.ichungelo.catfilm.ui.detail.DetailViewModel.Companion.MOVIE
-import com.ichungelo.catfilm.utils.DiffCallback
+import com.ichungelo.catfilm.utils.MovieDiffCallback
 import com.ichungelo.catfilm.utils.Helper
 
 class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
-    private val listMovies = ArrayList<DataEntity>()
+    private val listMovies = ArrayList<MovieEntity>()
 
-    fun setMovies(movies: List<DataEntity>?) {
+    fun setMovies(movies: List<MovieEntity>?) {
         if (movies == null) return
-        val diffCallback = DiffCallback(this.listMovies,movies)
+        val diffCallback = MovieDiffCallback(this.listMovies,movies)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         this.listMovies.clear()
         this.listMovies.addAll(movies)
@@ -30,15 +25,14 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
     class MoviesViewHolder(private val binding: ItemsPosterBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: DataEntity) {
+        fun bind(movie: MovieEntity) {
             with(binding) {
                 tvTitlePoster.text = movie.title
                 tvYearPoster.text = Helper.getReleaseYear(movie.releaseDate)
                 Helper.imageGlider(itemView.context, movie.posterPath, imgPoster)
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailActivity::class.java)
-                    intent.putExtra(DetailActivity.EXTRA_DATA, movie)
-                    intent.putExtra(DetailActivity.EXTRA_CATEGORY, MOVIE)
+                    intent.putExtra(DetailActivity.EXTRA_MOVIE, movie)
                     itemView.context.startActivity(intent)
                 }
             }

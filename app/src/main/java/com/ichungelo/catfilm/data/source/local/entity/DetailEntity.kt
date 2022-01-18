@@ -1,4 +1,4 @@
-package com.ichungelo.catfilm.data
+package com.ichungelo.catfilm.data.source.local.entity
 
 import com.ichungelo.catfilm.data.source.remote.response.GenreItems
 

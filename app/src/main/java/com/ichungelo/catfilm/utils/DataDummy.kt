@@ -1,16 +1,16 @@
 package com.ichungelo.catfilm.utils
 
-import com.ichungelo.catfilm.data.DataEntity
-import com.ichungelo.catfilm.data.DetailEntity
+import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
+import com.ichungelo.catfilm.data.source.local.entity.DetailEntity
 import com.ichungelo.catfilm.data.source.remote.response.*
 import kotlin.collections.ArrayList
 
 object DataDummy {
-    fun generateDataMovies(): List<DataEntity> {
-        val allDataMovies = ArrayList<DataEntity>()
+    fun generateDataMovies(): List<MovieEntity> {
+        val allDataMovies = ArrayList<MovieEntity>()
 
         allDataMovies.add(
-            DataEntity(
+            MovieEntity(
                 634649,
                 "Spider-Man: No Way Home",
                 "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
@@ -18,7 +18,7 @@ object DataDummy {
         )
 
         allDataMovies.add(
-            DataEntity(
+            MovieEntity(
                 568124,
                 "Encanto",
                 "/4j0PNHkMr5ax3IA8tjtxcmPU3QT.jpg"
@@ -26,7 +26,7 @@ object DataDummy {
         )
 
         allDataMovies.add(
-            DataEntity(
+            MovieEntity(
                 460458,
                 "Resident Evil: Welcome to Raccoon City",
                 "/7uRbWOXxpWDMtnsd2PF3clu65jc.jpg"
@@ -55,11 +55,11 @@ object DataDummy {
         )
     }
 
-    fun generateDataTvShows(): List<DataEntity> {
-        val allDataTvShows = ArrayList<DataEntity>()
+    fun generateDataTvShows(): List<MovieEntity> {
+        val allDataTvShows = ArrayList<MovieEntity>()
 
         allDataTvShows.add(
-            DataEntity(
+            MovieEntity(
                 77169,
                 "Cobra Kai",
                 "/6POBWybSBDBKjSs1VAQcnQC1qyt.jpg"
@@ -67,7 +67,7 @@ object DataDummy {
         )
 
         allDataTvShows.add(
-            DataEntity(
+            MovieEntity(
                 115036,
                 "The Book of Boba Fett",
                 "/gNbdjDi1HamTCrfvM9JeA94bNi2.jpg"
@@ -75,7 +75,7 @@ object DataDummy {
         )
 
         allDataTvShows.add(
-            DataEntity(
+            MovieEntity(
                 71914,
                 "The Wheel of Time",
                 "/mpgDeLhl8HbhI03XLB7iKO6M6JE.jpg"

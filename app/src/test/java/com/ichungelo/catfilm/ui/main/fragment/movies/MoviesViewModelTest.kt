@@ -3,8 +3,8 @@ package com.ichungelo.catfilm.ui.main.fragment.movies
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.ichungelo.catfilm.data.DataEntity
-import com.ichungelo.catfilm.data.source.TmdbRepository
+import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
+import com.ichungelo.catfilm.data.TmdbRepository
 import com.ichungelo.catfilm.utils.DataDummy
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.*
@@ -28,7 +28,7 @@ class MoviesViewModelTest {
     private lateinit var tmdbRepository: TmdbRepository
 
     @Mock
-    private lateinit var movieObserver: Observer<List<DataEntity>>
+    private lateinit var movieObserver: Observer<List<MovieEntity>>
 
     @Before
     fun setUp() {
@@ -37,11 +37,11 @@ class MoviesViewModelTest {
 
     @Test
     fun getMovies() {
-        val allMovies = MutableLiveData<List<DataEntity>>()
+        val allMovies = MutableLiveData<List<MovieEntity>>()
         allMovies.value = dummyAllMovies
 
         Mockito.`when`(tmdbRepository.getMovies()).thenReturn(allMovies)
-        val movieEntities = viewModel.getMovies().value as List<DataEntity>
+        val movieEntities = viewModel.getMovies().value as List<MovieEntity>
         Mockito.verify(tmdbRepository).getMovies()
         assertNotNull(movieEntities)
         for (index in movieEntities.indices) {
