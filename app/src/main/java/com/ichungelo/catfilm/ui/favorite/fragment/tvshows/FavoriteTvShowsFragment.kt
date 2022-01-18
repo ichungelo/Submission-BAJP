@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ichungelo.catfilm.databinding.FragmentFavoriteTvShowsBinding
 import com.ichungelo.catfilm.ui.main.fragment.tvshows.TvShowsAdapter
-import com.ichungelo.catfilm.ui.main.fragment.tvshows.TvShowsViewModel
 import com.ichungelo.catfilm.viewmodel.ViewModelFactory
 
 class FavoriteTvShowsFragment : Fragment() {
@@ -29,15 +29,15 @@ class FavoriteTvShowsFragment : Fragment() {
 
         val factory = ViewModelFactory.getInstance(requireActivity())
 
-        val tvViewModel = ViewModelProvider(this, factory)[TvShowsViewModel::class.java]
-        val tvShowsAdapter = TvShowsAdapter()
-        tvViewModel.getTvShows().observe(viewLifecycleOwner, { tvShows ->
-            tvShowsAdapter.setTvShows(tvShows)
+        val favoriteTvShowsViewModel = ViewModelProvider(this, factory)[FavoriteTvShowsViewModel::class.java]
+        val favoriteTvShowsAdapter = FavoriteTvShowsAdapter()
+        favoriteTvShowsViewModel.getAllTvShowsFavorite().observe(viewLifecycleOwner, { tvShows ->
+            favoriteTvShowsAdapter.setFavoriteTvShows(tvShows)
         })
 
         with(binding?.rvFavoriteTvShows) {
-            this?.layoutManager = GridLayoutManager(activity,2)
-            this?.adapter = tvShowsAdapter
+            this?.layoutManager = LinearLayoutManager(activity)
+            this?.adapter = favoriteTvShowsAdapter
         }
     }
 

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ichungelo.catfilm.databinding.FragmentFavoriteMoviesBinding
 import com.ichungelo.catfilm.ui.main.fragment.movies.MoviesAdapter
 import com.ichungelo.catfilm.ui.main.fragment.movies.MoviesViewModel
@@ -28,15 +29,15 @@ class FavoriteMoviesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val factory = ViewModelFactory.getInstance(requireActivity())
-        val moviesViewModel = ViewModelProvider(this, factory)[MoviesViewModel::class.java]
-        val moviesAdapter = MoviesAdapter()
-        moviesViewModel.getMovies().observe(viewLifecycleOwner, { movies ->
-            moviesAdapter.setMovies(movies)
+        val favoriteMoviesViewModel = ViewModelProvider(this, factory)[FavoriteMoviesViewModel::class.java]
+        val favoriteMoviesAdapter = FavoriteMoviesAdapter()
+        favoriteMoviesViewModel.getAllMoviesFavorite().observe(viewLifecycleOwner, { movies ->
+            favoriteMoviesAdapter.setFavoriteMovies(movies)
         })
 
         with(binding?.rvFavoriteMovies) {
-            this?.layoutManager = GridLayoutManager(activity,2)
-            this?.adapter = moviesAdapter
+            this?.layoutManager = LinearLayoutManager(activity)
+            this?.adapter = favoriteMoviesAdapter
         }
     }
 

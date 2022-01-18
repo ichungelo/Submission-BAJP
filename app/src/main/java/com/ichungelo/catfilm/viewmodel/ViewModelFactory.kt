@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.ichungelo.catfilm.data.TmdbRepository
 import com.ichungelo.catfilm.di.Injection
 import com.ichungelo.catfilm.ui.detail.DetailViewModel
+import com.ichungelo.catfilm.ui.favorite.fragment.movies.FavoriteMoviesViewModel
+import com.ichungelo.catfilm.ui.favorite.fragment.tvshows.FavoriteTvShowsViewModel
 import com.ichungelo.catfilm.ui.main.fragment.movies.MoviesViewModel
 import com.ichungelo.catfilm.ui.main.fragment.tvshows.TvShowsViewModel
 import com.ichungelo.catfilm.ui.search.movies.SearchMoviesViewModel
@@ -30,6 +32,12 @@ class ViewModelFactory private constructor(private val tmdbRepository: TmdbRepos
             }
             modelClass.isAssignableFrom(SearchTvShowsViewModel::class.java) -> {
                 SearchTvShowsViewModel(tmdbRepository) as T
+            }
+            modelClass.isAssignableFrom(FavoriteMoviesViewModel::class.java) -> {
+                FavoriteMoviesViewModel(tmdbRepository) as T
+            }
+            modelClass.isAssignableFrom(FavoriteTvShowsViewModel::class.java) -> {
+                FavoriteTvShowsViewModel(tmdbRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }
