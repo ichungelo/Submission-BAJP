@@ -2,6 +2,8 @@ package com.ichungelo.catfilm.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.ichungelo.catfilm.data.source.local.LocalDataSource
 import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
 import com.ichungelo.catfilm.data.source.local.entity.DetailEntity
@@ -146,17 +148,41 @@ class TmdbRepository private constructor(
         return detailTvShowResult
     }
 
-    override fun getAllMoviesFavorite(): LiveData<List<MovieEntity>> =
-        localDataSource.getAllMoviesFavorite()
+    override fun getAllMoviesFavorite(): LiveData<PagedList<MovieEntity>> {
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(4)
+            .setPageSize(4)
+            .build()
+        return LivePagedListBuilder(localDataSource.getAllMoviesFavorite(), config).build()
+    }
 
-    override fun getAllTvShowsFavorite(): LiveData<List<TvEntity>> =
-        localDataSource.getAllTvShowsFavorite()
+    override fun getAllTvShowsFavorite(): LiveData<PagedList<TvEntity>> {
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(4)
+            .setPageSize(4)
+            .build()
+        return LivePagedListBuilder(localDataSource.getAllTvShowsFavorite(), config).build()
+    }
 
-    override fun getSearchMoviesFavorite(query: String): LiveData<List<MovieEntity>> =
-        localDataSource.getSearchMoviesFavorite(query)
+    override fun getSearchMoviesFavorite(query: String): LiveData<PagedList<MovieEntity>> {
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(4)
+            .setPageSize(4)
+            .build()
+        return LivePagedListBuilder(localDataSource.getSearchMoviesFavorite(query), config).build()
+    }
 
-    override fun getSearchTvShowsFavorite(query: String): LiveData<List<TvEntity>> =
-        localDataSource.getSearchTvShowsFavorite(query)
+    override fun getSearchTvShowsFavorite(query: String): LiveData<PagedList<TvEntity>> {
+        val config = PagedList.Config.Builder()
+            .setEnablePlaceholders(false)
+            .setInitialLoadSizeHint(4)
+            .setPageSize(4)
+            .build()
+        return LivePagedListBuilder(localDataSource.getSearchTvShowsFavorite(query), config).build()
+    }
 
     override fun getMovieById(id: String): LiveData<MovieEntity> = localDataSource.getMovieById(id)
 

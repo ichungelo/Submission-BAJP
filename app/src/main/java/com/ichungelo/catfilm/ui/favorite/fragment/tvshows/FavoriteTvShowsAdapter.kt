@@ -3,8 +3,10 @@ package com.ichungelo.catfilm.ui.favorite.fragment.tvshows
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
 import com.ichungelo.catfilm.data.source.local.entity.TvEntity
 import com.ichungelo.catfilm.databinding.ItemsResultBinding
 import com.ichungelo.catfilm.ui.detail.DetailActivity
@@ -13,17 +15,7 @@ import com.ichungelo.catfilm.utils.Helper
 import com.ichungelo.catfilm.utils.MovieDiffCallback
 import com.ichungelo.catfilm.utils.TvShowDiffCallback
 
-class FavoriteTvShowsAdapter: RecyclerView.Adapter<FavoriteTvShowsAdapter.FavoriteTvShowsViewHolder>() {
-    private val listFavoriteTvShows = ArrayList<TvEntity>()
-
-    fun setFavoriteTvShows(tvShows: List<TvEntity>?) {
-        if (tvShows == null) return
-        val diffCallback = TvShowDiffCallback(this.listFavoriteTvShows, tvShows)
-        val diffResult = DiffUtil.calculateDiff(diffCallback)
-        this.listFavoriteTvShows.clear()
-        this.listFavoriteTvShows.addAll(tvShows)
-        diffResult.dispatchUpdatesTo(this)
-    }
+class FavoriteTvShowsAdapter: PagedListAdapter<TvEntity, FavoriteTvShowsAdapter.FavoriteTvShowsViewHolder>(DIFF_CALLBACK) {
 
     class FavoriteTvShowsViewHolder(private val binding: ItemsResultBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(tvShows: TvEntity) {
@@ -46,9 +38,20 @@ class FavoriteTvShowsAdapter: RecyclerView.Adapter<FavoriteTvShowsAdapter.Favori
     }
 
     override fun onBindViewHolder(holder: FavoriteTvShowsViewHolder, position: Int) {
-        val tvShow = listFavoriteTvShows[position]
-        holder.bind(tvShow)
+        val tvShow = getItem(position)
+        if (tvShow != null) {
+            holder.bind(tvShow)
+        }
     }
 
-    override fun getItemCount(): Int = listFavoriteTvShows.size
+    companion object {
+        private val  DIFF_CALLBACK = object : DiffUtil.ItemCallback<TvEntity>() {
+            override fun areItemsTheSame(oldItem: TvEntity, newItem: TvEntity): Boolean {
+                return oldItem.id == newItem.id
+            }
+            override fun areContentsTheSame(oldItem: TvEntity, newItem: TvEntity): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 }

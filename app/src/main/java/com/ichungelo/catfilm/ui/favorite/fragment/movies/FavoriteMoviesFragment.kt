@@ -32,7 +32,7 @@ class FavoriteMoviesFragment : Fragment() {
         val favoriteMoviesViewModel = ViewModelProvider(this, factory)[FavoriteMoviesViewModel::class.java]
         val favoriteMoviesAdapter = FavoriteMoviesAdapter()
         favoriteMoviesViewModel.getAllMoviesFavorite().observe(viewLifecycleOwner, { movies ->
-            favoriteMoviesAdapter.setFavoriteMovies(movies)
+            favoriteMoviesAdapter.submitList(movies)
         })
 
         with(binding?.rvFavoriteMovies) {

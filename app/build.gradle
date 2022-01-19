@@ -85,4 +85,7 @@ dependencies {
     //Room
     implementation "androidx.room:room-runtime:2.4.1"
     kapt "androidx.room:room-compiler:2.4.1"
+
+    //Paging
+    implementation "androidx.paging:paging-runtime-ktx:2.1.2"
 }
