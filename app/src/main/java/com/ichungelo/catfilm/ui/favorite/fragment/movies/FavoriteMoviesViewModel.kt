@@ -7,6 +7,5 @@ import com.ichungelo.catfilm.data.TmdbRepository
 import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
 
 class FavoriteMoviesViewModel(private val tmdbRepository: TmdbRepository): ViewModel() {
-    fun getAllMoviesFavorite(): LiveData<PagedList<MovieEntity>> = tmdbRepository.getAllMoviesFavorite()
-    fun getSearchMoviesFavorite(query: String) = tmdbRepository.getSearchMoviesFavorite(query)
+    fun getAllMoviesFavorite(title: String) = tmdbRepository.getAllMoviesFavorite(title)
 }

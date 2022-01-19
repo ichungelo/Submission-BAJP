@@ -17,6 +17,8 @@ import java.util.*
 class DetailActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityDetailBinding
     private lateinit var viewModel: DetailViewModel
+    private var movieExtra: MovieEntity? = null
+    private var tvExtra: TvEntity? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +30,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
 
-        val movieExtra = intent.getParcelableExtra<MovieEntity>(EXTRA_MOVIE)
-        val tvExtra = intent.getParcelableExtra<TvEntity>(EXTRA_TV)
+        movieExtra = intent.getParcelableExtra(EXTRA_MOVIE)
+        tvExtra = intent.getParcelableExtra(EXTRA_TV)
         progressBarVisibility(true)
         movieExtra?.let {
             viewModel.getDetailMovie(it.id.toString()).observe(this, { movieResult ->
@@ -62,6 +64,9 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                     with(binding.btnDetailFavorite) {
                         setOnClickListener {
                             viewModel.deleteMovieFavorite(intent.getParcelableExtra(EXTRA_MOVIE)!!)
+                            movieExtra?.title?.let {
+                                Helper.favoriteRemovedToast(this@DetailActivity, it)
+                            }
                         }
                         setImageResource(R.drawable.ic_heart)
                     }
@@ -69,6 +74,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                     with(binding.btnDetailFavorite) {
                         setOnClickListener {
                             viewModel.insertMovieFavorite(intent.getParcelableExtra(EXTRA_MOVIE)!!)
+                            movieExtra?.title?.let { Helper.favoriteAddedToast(this@DetailActivity, it)
+                            }
                         }
                         setImageResource(R.drawable.ic_heart_unselected)
                     }
@@ -80,6 +87,9 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                     with(binding.btnDetailFavorite) {
                         setOnClickListener {
                             viewModel.deleteTvFavorite(intent.getParcelableExtra(EXTRA_TV)!!)
+                            tvExtra?.title?.let {
+                                Helper.favoriteRemovedToast(this@DetailActivity, it)
+                            }
                         }
                         setImageResource(R.drawable.ic_heart)
                     }
@@ -87,6 +97,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                     with(binding.btnDetailFavorite) {
                         setOnClickListener {
                             viewModel.insertTvFavorite(intent.getParcelableExtra(EXTRA_TV)!!)
+                            tvExtra?.title?.let { Helper.favoriteAddedToast(this@DetailActivity, it)
+                            }
                         }
                         setImageResource(R.drawable.ic_heart_unselected)
                     }

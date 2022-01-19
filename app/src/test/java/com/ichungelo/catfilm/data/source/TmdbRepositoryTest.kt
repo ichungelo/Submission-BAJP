@@ -103,18 +103,6 @@ class TmdbRepositoryTest {
     }
 
     @Test
-    fun getSearchMoviesFavorite() {
-        val movieList = MutableLiveData<List<MovieEntity>>()
-        movieList.value = movieLocal
-
-        `when`(local.getSearchMoviesFavorite(eq(dummyQuery))).thenReturn(movieList)
-        val movieEntities = LiveDataTestUtils.getValue(repository.getSearchMoviesFavorite(eq(dummyQuery)))
-        verify(local).getSearchMoviesFavorite(eq(dummyQuery))
-        assertNotNull(movieEntities)
-        assertEquals(movieLocal.size.toLong(), movieEntities.size.toLong())
-    }
-
-    @Test
     fun getMovieById() {
         val movie = MutableLiveData<MovieEntity>()
         movie.value = movieById
@@ -185,18 +173,6 @@ class TmdbRepositoryTest {
         `when`(local.getAllTvShowsFavorite()).thenReturn(tvShowList)
         val tvEntities = LiveDataTestUtils.getValue(repository.getAllTvShowsFavorite())
         verify(local).getAllTvShowsFavorite()
-        assertNotNull(tvEntities)
-        assertEquals(tvShowLocal.size.toLong(), tvEntities.size.toLong())
-    }
-
-    @Test
-    fun getSearchTvShowsFavorite() {
-        val tvShowList = MutableLiveData<List<TvEntity>>()
-        tvShowList.value = tvShowLocal
-
-        `when`(local.getSearchTvShowsFavorite(eq(dummyQuery))).thenReturn(tvShowList)
-        val tvEntities = LiveDataTestUtils.getValue(repository.getSearchTvShowsFavorite(eq(dummyQuery)))
-        verify(local).getSearchTvShowsFavorite(eq(dummyQuery))
         assertNotNull(tvEntities)
         assertEquals(tvShowLocal.size.toLong(), tvEntities.size.toLong())
     }
