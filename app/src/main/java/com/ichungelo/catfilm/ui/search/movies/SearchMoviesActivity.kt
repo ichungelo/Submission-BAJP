@@ -55,6 +55,7 @@ class SearchMoviesActivity : AppCompatActivity(), View.OnClickListener,
                 adapter.setSearchMovies(result)
             })
         }
+        binding.svMovies.clearFocus()
         return true
     }
 

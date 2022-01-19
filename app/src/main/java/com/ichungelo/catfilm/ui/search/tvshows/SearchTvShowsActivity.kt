@@ -32,7 +32,7 @@ class SearchTvShowsActivity : AppCompatActivity(), View.OnClickListener,
             rvSearchTvShows.layoutManager = LinearLayoutManager(this@SearchTvShowsActivity)
             rvSearchTvShows.adapter = adapter
             btnSearchTvShowsBack.setOnClickListener(this@SearchTvShowsActivity)
-            showSoftKeyboard(svTvShows)
+            showSoftKeyboard(binding.svTvShows)
         }
     }
 
@@ -55,6 +55,7 @@ class SearchTvShowsActivity : AppCompatActivity(), View.OnClickListener,
                 adapter.setSearchTvShows(result)
             })
         }
+        binding.svTvShows.clearFocus()
         return true
     }
 
