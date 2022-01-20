@@ -74,7 +74,7 @@
         android:id="@+id/tv_search_movies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-40dp"
+        android:layout_marginTop="-30dp"
         android:gravity="center"
         android:text="@string/tv_bg_search"
         android:textSize="18sp"
