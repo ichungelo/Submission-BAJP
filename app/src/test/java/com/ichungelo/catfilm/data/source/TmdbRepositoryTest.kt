@@ -2,10 +2,12 @@ package com.ichungelo.catfilm.data.source
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.DataSource
 import com.ichungelo.catfilm.data.source.local.LocalDataSource
 import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
 import com.ichungelo.catfilm.data.source.local.entity.TvEntity
 import com.ichungelo.catfilm.data.source.remote.RemoteDataSource
+import com.ichungelo.catfilm.util.PagedListUtil
 import com.ichungelo.catfilm.utils.DataDummy
 import com.ichungelo.catfilm.utils.LiveDataTestUtils
 import com.nhaarman.mockitokotlin2.any
@@ -92,26 +94,14 @@ class TmdbRepositoryTest {
 
     @Test
     fun getAllMoviesFavorite() {
-        val movieList = MutableLiveData<List<MovieEntity>>()
-        movieList.value = movieLocal
+        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, MovieEntity>
+        `when`(local.getAllMoviesFavorite()).thenReturn(dataSourceFactory)
+        repository.getAllMoviesFavorite()
 
-        `when`(local.getAllMoviesFavorite()).thenReturn(movieList)
-        val movieEntities = LiveDataTestUtils.getValue(repository.getAllMoviesFavorite())
+        val movieEntities = PagedListUtil.mockPagedList(DataDummy.generateDataMovies())
         verify(local).getAllMoviesFavorite()
         assertNotNull(movieEntities)
-        assertEquals(movieLocal.size.toLong(), movieEntities.size.toLong())
-    }
-
-    @Test
-    fun getSearchMoviesFavorite() {
-        val movieList = MutableLiveData<List<MovieEntity>>()
-        movieList.value = movieLocal
-
-        `when`(local.getSearchMoviesFavorite(eq(dummyQuery))).thenReturn(movieList)
-        val movieEntities = LiveDataTestUtils.getValue(repository.getSearchMoviesFavorite(eq(dummyQuery)))
-        verify(local).getSearchMoviesFavorite(eq(dummyQuery))
-        assertNotNull(movieEntities)
-        assertEquals(movieLocal.size.toLong(), movieEntities.size.toLong())
+        assertEquals(tvShowLocal.size.toLong(), movieEntities.size.toLong())
     }
 
     @Test
@@ -179,24 +169,12 @@ class TmdbRepositoryTest {
 
     @Test
     fun getAllTvShowsFavorite() {
-        val tvShowList = MutableLiveData<List<TvEntity>>()
-        tvShowList.value = tvShowLocal
+        val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, TvEntity>
+        `when`(local.getAllTvShowsFavorite()).thenReturn(dataSourceFactory)
+        repository.getAllTvShowsFavorite()
 
-        `when`(local.getAllTvShowsFavorite()).thenReturn(tvShowList)
-        val tvEntities = LiveDataTestUtils.getValue(repository.getAllTvShowsFavorite())
+        val tvEntities = PagedListUtil.mockPagedList(DataDummy.generateDataMovies())
         verify(local).getAllTvShowsFavorite()
-        assertNotNull(tvEntities)
-        assertEquals(tvShowLocal.size.toLong(), tvEntities.size.toLong())
-    }
-
-    @Test
-    fun getSearchTvShowsFavorite() {
-        val tvShowList = MutableLiveData<List<TvEntity>>()
-        tvShowList.value = tvShowLocal
-
-        `when`(local.getSearchTvShowsFavorite(eq(dummyQuery))).thenReturn(tvShowList)
-        val tvEntities = LiveDataTestUtils.getValue(repository.getSearchTvShowsFavorite(eq(dummyQuery)))
-        verify(local).getSearchTvShowsFavorite(eq(dummyQuery))
         assertNotNull(tvEntities)
         assertEquals(tvShowLocal.size.toLong(), tvEntities.size.toLong())
     }
