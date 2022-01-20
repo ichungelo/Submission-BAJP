@@ -95,11 +95,11 @@ class TmdbRepositoryTest {
     @Test
     fun getAllMoviesFavorite() {
         val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, MovieEntity>
-        `when`(local.getAllMoviesFavorite()).thenReturn(dataSourceFactory)
-        repository.getAllMoviesFavorite()
+        `when`(local.getAllMoviesFavorite("")).thenReturn(dataSourceFactory)
+        repository.getAllMoviesFavorite("")
 
         val movieEntities = PagedListUtil.mockPagedList(DataDummy.generateDataMovies())
-        verify(local).getAllMoviesFavorite()
+        verify(local).getAllMoviesFavorite("")
         assertNotNull(movieEntities)
         assertEquals(tvShowLocal.size.toLong(), movieEntities.size.toLong())
     }
@@ -170,11 +170,11 @@ class TmdbRepositoryTest {
     @Test
     fun getAllTvShowsFavorite() {
         val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, TvEntity>
-        `when`(local.getAllTvShowsFavorite()).thenReturn(dataSourceFactory)
-        repository.getAllTvShowsFavorite()
+        `when`(local.getAllTvShowsFavorite("")).thenReturn(dataSourceFactory)
+        repository.getAllTvShowsFavorite("")
 
         val tvEntities = PagedListUtil.mockPagedList(DataDummy.generateDataMovies())
-        verify(local).getAllTvShowsFavorite()
+        verify(local).getAllTvShowsFavorite("")
         assertNotNull(tvEntities)
         assertEquals(tvShowLocal.size.toLong(), tvEntities.size.toLong())
     }

@@ -50,9 +50,9 @@ class FavoriteMoviesViewModelTest {
         val favoriteMovies = MutableLiveData<PagedList<MovieEntity>>()
         favoriteMovies.value = dummy
 
-        Mockito.`when`(tmdbRepository.getAllMoviesFavorite()).thenReturn(favoriteMovies)
+        Mockito.`when`(tmdbRepository.getAllMoviesFavorite("")).thenReturn(favoriteMovies)
         val movieEntities = viewModel.getAllMoviesFavorite().value as List<MovieEntity>
-        Mockito.verify(tmdbRepository).getAllMoviesFavorite()
+        Mockito.verify(tmdbRepository).getAllMoviesFavorite("")
         assertNotNull(movieEntities)
         assertEquals(3, movieEntities.size)
         viewModel.getAllMoviesFavorite().observeForever(movieObserver)

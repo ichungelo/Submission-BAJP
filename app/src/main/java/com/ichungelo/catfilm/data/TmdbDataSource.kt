@@ -13,10 +13,8 @@ interface TmdbDataSource {
     fun getTvShows(): LiveData<List<TvEntity>>
     fun getSearchTvShows(query: String): LiveData<List<TvEntity>>
     fun getDetailTvShow(dataId: String): LiveData<DetailEntity>
-    fun getAllMoviesFavorite(): LiveData<PagedList<MovieEntity>>
-    fun getAllTvShowsFavorite(): LiveData<PagedList<TvEntity>>
-    fun getSearchMoviesFavorite(query: String): LiveData<PagedList<MovieEntity>>
-    fun getSearchTvShowsFavorite(query: String): LiveData<PagedList<TvEntity>>
+    fun getAllMoviesFavorite(title: String): LiveData<PagedList<MovieEntity>>
+    fun getAllTvShowsFavorite(title: String): LiveData<PagedList<TvEntity>>
     fun getMovieById(id: String): LiveData<MovieEntity>
     fun getTvById(id: String): LiveData<TvEntity>
     fun insertMovieFavorite(movie: MovieEntity)

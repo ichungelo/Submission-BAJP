@@ -5,12 +5,17 @@ import androidx.paging.DataSource
 import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
 import com.ichungelo.catfilm.data.source.local.entity.TvEntity
 import com.ichungelo.catfilm.data.source.local.room.TmdbDao
+import com.ichungelo.catfilm.utils.SearchUtils
 
 class LocalDataSource private constructor(private val tmdbDao: TmdbDao) {
-    fun getAllMoviesFavorite(): DataSource.Factory<Int, MovieEntity> = tmdbDao.getAllMovies()
-    fun getAllTvShowsFavorite(): DataSource.Factory<Int, TvEntity> = tmdbDao.getAllTv()
-    fun getSearchMoviesFavorite(query: String): DataSource.Factory<Int, MovieEntity> = tmdbDao.getDataMovieQuery(query)
-    fun getSearchTvShowsFavorite(query: String): DataSource.Factory<Int, TvEntity> = tmdbDao.getDataTvQuery(query)
+    fun getAllMoviesFavorite(title: String): DataSource.Factory<Int, MovieEntity>{
+        val query = SearchUtils.getMoviesQuery(title)
+        return tmdbDao.getAllMovies(query)
+    }
+    fun getAllTvShowsFavorite(title: String): DataSource.Factory<Int, TvEntity> {
+        val query = SearchUtils.getTvQuery(title)
+        return tmdbDao.getAllTv(query)
+    }
     fun getMovieById(id: String): LiveData<MovieEntity> = tmdbDao.getDataMovieById(id)
     fun getTvById(id: String): LiveData<TvEntity> = tmdbDao.getDataTvById(id)
     fun insertMovieFavorite(movie: MovieEntity) = tmdbDao.insertMovie(movie)
