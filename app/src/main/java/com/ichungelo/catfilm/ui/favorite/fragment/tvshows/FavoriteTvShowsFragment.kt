@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ichungelo.catfilm.R
 import com.ichungelo.catfilm.databinding.FragmentFavoriteTvShowsBinding
 import com.ichungelo.catfilm.viewmodel.ViewModelFactory
 
@@ -32,11 +33,16 @@ class FavoriteTvShowsFragment : Fragment(), SearchView.OnQueryTextListener {
 
         val factory = ViewModelFactory.getInstance(requireActivity())
 
-        _favoriteTvShowsViewModel = ViewModelProvider(this, factory)[FavoriteTvShowsViewModel::class.java]
+        _favoriteTvShowsViewModel =
+            ViewModelProvider(this, factory)[FavoriteTvShowsViewModel::class.java]
         _favoriteTvShowsAdapter = FavoriteTvShowsAdapter()
-
-        favoriteTvShowsViewModel?.getAllTvShowsFavorite("")?.observe(viewLifecycleOwner, { tvShows ->
+        backgroundAndProgressBarVisibility(background = false, progressBar = false)
+        favoriteTvShowsViewModel?.getAllTvShowsFavorite(EMPTY_SEARCH)
+            ?.observe(viewLifecycleOwner, { tvShows ->
                 favoriteTvShowsAdapter?.submitList(tvShows)
+                if (tvShows.isEmpty()) {
+                    backgroundAndProgressBarVisibility(background = true, progressBar = false)
+                }
             })
 
         binding?.let {
@@ -63,8 +69,46 @@ class FavoriteTvShowsFragment : Fragment(), SearchView.OnQueryTextListener {
             favoriteTvShowsViewModel?.getAllTvShowsFavorite(searchQuery)
                 ?.observe(viewLifecycleOwner, { tvShows ->
                     favoriteTvShowsAdapter?.submitList(tvShows)
+                    if (tvShows.isEmpty()) {
+                        backgroundAndProgressBarVisibility(background = true, progressBar = false)
+                        binding?.imgBgFavoriteTvShows?.setImageResource(R.drawable.bg_noresult)
+                        binding?.tvBgFavoriteTvShows?.text = getString(R.string.text_noresult_search)
+                    } else {
+                        backgroundAndProgressBarVisibility(background = false, progressBar = false)
+                    }
+                })
+        } else {
+            favoriteTvShowsViewModel?.getAllTvShowsFavorite("")
+                ?.observe(viewLifecycleOwner, { tvShows ->
+                    favoriteTvShowsAdapter?.submitList(tvShows)
+                    if (tvShows.isEmpty()) {
+                        backgroundAndProgressBarVisibility(background = true, progressBar = false)
+                        binding?.imgBgFavoriteTvShows?.setImageResource(R.drawable.bg_nofavorite)
+                        binding?.tvBgFavoriteTvShows?.text = getString(R.string.add_movies_advice)
+                    } else {
+                        backgroundAndProgressBarVisibility(background = false, progressBar = false)
+                    }
                 })
         }
         return true
+    }
+
+    private fun backgroundAndProgressBarVisibility(background: Boolean, progressBar: Boolean) {
+        if (background) {
+            with(binding) {
+                this?.imgBgFavoriteTvShows?.visibility = View.VISIBLE
+                this?.tvBgFavoriteTvShows?.visibility = View.VISIBLE
+            }
+        } else {
+            with(binding) {
+                this?.imgBgFavoriteTvShows?.visibility = View.GONE
+                this?.tvBgFavoriteTvShows?.visibility = View.GONE
+            }
+        }
+        binding?.progressFavoriteTvShows?.visibility = if (progressBar) View.VISIBLE else View.GONE
+    }
+
+    companion object {
+        const val EMPTY_SEARCH = ""
     }
 }
