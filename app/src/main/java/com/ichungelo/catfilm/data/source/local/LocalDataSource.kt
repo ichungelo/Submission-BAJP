@@ -1,19 +1,21 @@
 package com.ichungelo.catfilm.data.source.local
 
+import androidx.appcompat.widget.DialogTitle
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
 import com.ichungelo.catfilm.data.source.local.entity.TvEntity
 import com.ichungelo.catfilm.data.source.local.room.TmdbDao
-import com.ichungelo.catfilm.utils.SearchUtils
+import com.ichungelo.catfilm.utils.FavoriteUtil
 
 class LocalDataSource private constructor(private val tmdbDao: TmdbDao) {
-    fun getAllMoviesFavorite(title: String): DataSource.Factory<Int, MovieEntity>{
-        val query = SearchUtils.getMoviesQuery(title)
+    fun getAllMoviesFavorite(title: String): DataSource.Factory<Int, MovieEntity> {
+        val query = FavoriteUtil.getSearchMoviesQuery(title)
         return tmdbDao.getAllMovies(query)
     }
-    fun getAllTvShowsFavorite(title: String): DataSource.Factory<Int, TvEntity> {
-        val query = SearchUtils.getTvQuery(title)
+    fun getAllTvShowsFavorite(title: String): DataSource.Factory<Int, TvEntity>{
+        val query = FavoriteUtil.getSearchTvShowQuery(title)
         return tmdbDao.getAllTv(query)
     }
     fun getMovieById(id: String): LiveData<MovieEntity> = tmdbDao.getDataMovieById(id)

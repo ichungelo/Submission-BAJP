@@ -3,13 +3,14 @@ package com.ichungelo.catfilm.data.source
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
+import com.bumptech.glide.load.engine.Resource
 import com.ichungelo.catfilm.data.source.local.LocalDataSource
 import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
 import com.ichungelo.catfilm.data.source.local.entity.TvEntity
 import com.ichungelo.catfilm.data.source.remote.RemoteDataSource
-import com.ichungelo.catfilm.util.PagedListUtil
 import com.ichungelo.catfilm.utils.DataDummy
 import com.ichungelo.catfilm.utils.LiveDataTestUtils
+import com.ichungelo.catfilm.utils.PagedListUtil
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doAnswer
 import com.nhaarman.mockitokotlin2.eq
@@ -101,7 +102,7 @@ class TmdbRepositoryTest {
         val movieEntities = PagedListUtil.mockPagedList(DataDummy.generateDataMovies())
         verify(local).getAllMoviesFavorite("")
         assertNotNull(movieEntities)
-        assertEquals(tvShowLocal.size.toLong(), movieEntities.size.toLong())
+        assertEquals(movieLocal.size.toLong(), movieEntities.size.toLong())
     }
 
     @Test
@@ -173,7 +174,7 @@ class TmdbRepositoryTest {
         `when`(local.getAllTvShowsFavorite("")).thenReturn(dataSourceFactory)
         repository.getAllTvShowsFavorite("")
 
-        val tvEntities = PagedListUtil.mockPagedList(DataDummy.generateDataMovies())
+        val tvEntities = PagedListUtil.mockPagedList(DataDummy.generateDataTvShows())
         verify(local).getAllTvShowsFavorite("")
         assertNotNull(tvEntities)
         assertEquals(tvShowLocal.size.toLong(), tvEntities.size.toLong())

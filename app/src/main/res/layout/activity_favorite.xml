@@ -36,26 +36,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="64dp"
                 android:fontFamily="@font/ubuntu_medium"
                 android:gravity="center"
                 android:text="@string/favorite"
                 android:textColor="@color/text_main"
                 android:textSize="24sp"
-                app:layout_constraintEnd_toStartOf="@+id/btn_favorite_sort"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btn_favorite_back"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:id="@+id/btn_favorite_sort"
-                android:layout_width="64dp"
-                android:layout_height="0dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_sort"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/sort_button" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,6 +23,7 @@ class SearchTvShowsActivity : AppCompatActivity(), View.OnClickListener,
         binding = ActivitySearchTvShowsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        backgroundAndProgressBarVisibility(background = true, progressBar = false)
         val factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[SearchTvShowsViewModel::class.java]
         adapter = SearchTvShowsAdapter()
@@ -42,17 +43,18 @@ class SearchTvShowsActivity : AppCompatActivity(), View.OnClickListener,
         }
     }
 
-    private fun showSoftKeyboard(view: View) {
-        if (view.requestFocus()) {
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
-        }
-    }
-
     override fun onQueryTextSubmit(query: String?): Boolean {
+        backgroundAndProgressBarVisibility(background = false, progressBar = true)
         query?.let {
             viewModel.getSearchTvShows(it).observe(this, { result ->
                 adapter.setSearchTvShows(result)
+                if (result.isNotEmpty()) {
+                    backgroundAndProgressBarVisibility(background = false, progressBar = false)
+                } else {
+                    backgroundAndProgressBarVisibility(background = true, progressBar = false)
+                    binding.imgBgSearchTvShow.setImageResource(R.drawable.bg_noresult)
+                    binding.tvSearchTvShows.text = getString(R.string.text_noresult_search)
+                }
             })
         }
         binding.svTvShows.clearFocus()
@@ -61,5 +63,27 @@ class SearchTvShowsActivity : AppCompatActivity(), View.OnClickListener,
 
     override fun onQueryTextChange(newText: String?): Boolean {
         return false
+    }
+
+    private fun showSoftKeyboard(view: View) {
+        if (view.requestFocus()) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+        }
+    }
+
+    private fun backgroundAndProgressBarVisibility(background: Boolean, progressBar: Boolean) {
+        if (background) {
+            with(binding) {
+                imgBgSearchTvShow.visibility = View.VISIBLE
+                tvSearchTvShows.visibility = View.VISIBLE
+            }
+        } else {
+            with(binding) {
+                imgBgSearchTvShow.visibility = View.GONE
+                tvSearchTvShows.visibility = View.GONE
+            }
+        }
+        binding.progressSearchTvShows.visibility = if (progressBar) View.VISIBLE else View.GONE
     }
 }

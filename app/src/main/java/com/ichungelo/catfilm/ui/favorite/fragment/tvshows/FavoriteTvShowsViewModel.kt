@@ -4,5 +4,5 @@ import androidx.lifecycle.ViewModel
 import com.ichungelo.catfilm.data.TmdbRepository
 
 class FavoriteTvShowsViewModel(private val tmdbRepository: TmdbRepository): ViewModel() {
-    fun getAllTvShowsFavorite() = tmdbRepository.getAllTvShowsFavorite("kai")
+    fun getAllTvShowsFavorite(title: String) = tmdbRepository.getAllTvShowsFavorite(title)
 }

@@ -2,6 +2,7 @@ package com.ichungelo.catfilm.data
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagedList
+import androidx.sqlite.db.SupportSQLiteQuery
 import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
 import com.ichungelo.catfilm.data.source.local.entity.DetailEntity
 import com.ichungelo.catfilm.data.source.local.entity.TvEntity

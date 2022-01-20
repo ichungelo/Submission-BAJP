@@ -8,7 +8,6 @@ import com.ichungelo.catfilm.data.TmdbRepository
 import com.ichungelo.catfilm.data.source.local.entity.TvEntity
 import com.ichungelo.catfilm.utils.DataDummy
 import com.nhaarman.mockitokotlin2.verify
-import org.junit.Assert
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -19,12 +18,12 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
-import java.util.*
 
 @RunWith(MockitoJUnitRunner::class)
 class FavoriteTvShowsViewModelTest {
 
     private lateinit var viewModel: FavoriteTvShowsViewModel
+    private val dummyTvShows = DataDummy.generateDataTvShows()
 
     @get:Rule
     var instantTaskExecutorRule =InstantTaskExecutorRule()
@@ -51,11 +50,11 @@ class FavoriteTvShowsViewModelTest {
         favoriteTvShows.value = dummy
 
         `when`(tmdbRepository.getAllTvShowsFavorite("")).thenReturn(favoriteTvShows)
-        val tvEntities = viewModel.getAllTvShowsFavorite().value as List<TvEntity>
-        Mockito.verify(tmdbRepository).getAllTvShowsFavorite("")
+        val tvEntities = viewModel.getAllTvShowsFavorite("").value as List<TvEntity>
+        verify(tmdbRepository).getAllTvShowsFavorite("")
         assertNotNull(tvEntities)
         assertEquals(3, tvEntities.size)
-        viewModel.getAllTvShowsFavorite().observeForever(tvShowObserver)
+        viewModel.getAllTvShowsFavorite("").observeForever(tvShowObserver)
         verify(tvShowObserver).onChanged(dummy)
     }
 }

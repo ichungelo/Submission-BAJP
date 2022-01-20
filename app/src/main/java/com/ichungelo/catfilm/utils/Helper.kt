@@ -3,6 +3,7 @@ package com.ichungelo.catfilm.utils
 import android.app.Activity
 import android.content.Context
 import android.widget.ImageView
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.ichungelo.catfilm.BuildConfig
@@ -50,5 +51,13 @@ object Helper {
             }
         }
         return result
+    }
+
+    fun favoriteAddedToast(context: Context, title: String) {
+        Toast.makeText(context,"$title just added to favorite", Toast.LENGTH_SHORT).show()
+    }
+
+    fun favoriteRemovedToast(context: Context, title: String) {
+        Toast.makeText(context, "$title just removed from favorite", Toast.LENGTH_SHORT).show()
     }
 }

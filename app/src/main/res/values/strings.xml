@@ -31,5 +31,10 @@
     <string name="favorite_tv_shows">Favorite Tv Shows</string>
     <string name="dummy_year">2018</string>
     <string name="sort_button">sort button</string>
-
+    <string name="favorite_movies_hint">Search Favorite Movies..</string>
+    <string name="favorite_tv_show_hint">Search Favorite Tv Shows..</string>
+    <string name="tv_bg_search">Your search result will appear here</string>
+    <string name="text_noresult_search">Try another keywords or edit your filters!</string>
+    <string name="add_movies_advice">Add movies from discover or search.</string>
+    <string name="add_tv_shows_advice">Add tv shows from discover or search</string>
 </resources>

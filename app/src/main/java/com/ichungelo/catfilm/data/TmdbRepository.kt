@@ -10,6 +10,7 @@ import com.ichungelo.catfilm.data.source.local.entity.DetailEntity
 import com.ichungelo.catfilm.data.source.local.entity.TvEntity
 import com.ichungelo.catfilm.data.source.remote.RemoteDataSource
 import com.ichungelo.catfilm.data.source.remote.response.*
+import com.ichungelo.catfilm.utils.FavoriteUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
