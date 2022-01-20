@@ -7,11 +7,9 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
-import com.ichungelo.catfilm.data.source.local.entity.TvEntity
 import com.ichungelo.catfilm.databinding.ItemsResultBinding
 import com.ichungelo.catfilm.ui.detail.DetailActivity
 import com.ichungelo.catfilm.utils.Helper
-import com.ichungelo.catfilm.utils.MovieDiffCallback
 
 class FavoriteMoviesAdapter: PagedListAdapter<MovieEntity, FavoriteMoviesAdapter.FavoriteMoviesViewHolder>(DIFF_CALLBACK) {
 

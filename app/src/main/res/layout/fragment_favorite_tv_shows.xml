@@ -61,7 +61,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rv_favorite_tv_shows" />
+        app:layout_constraintTop_toTopOf="@+id/rv_favorite_tv_shows"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/tv_bg_favorite_tv_shows"

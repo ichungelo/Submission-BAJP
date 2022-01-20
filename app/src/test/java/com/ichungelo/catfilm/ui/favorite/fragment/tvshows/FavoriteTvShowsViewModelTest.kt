@@ -6,7 +6,6 @@ import androidx.lifecycle.Observer
 import androidx.paging.PagedList
 import com.ichungelo.catfilm.data.TmdbRepository
 import com.ichungelo.catfilm.data.source.local.entity.TvEntity
-import com.ichungelo.catfilm.utils.DataDummy
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.*
 import org.junit.Before
@@ -15,7 +14,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
@@ -23,7 +21,6 @@ import org.mockito.junit.MockitoJUnitRunner
 class FavoriteTvShowsViewModelTest {
 
     private lateinit var viewModel: FavoriteTvShowsViewModel
-    private val dummyTvShows = DataDummy.generateDataTvShows()
 
     @get:Rule
     var instantTaskExecutorRule =InstantTaskExecutorRule()

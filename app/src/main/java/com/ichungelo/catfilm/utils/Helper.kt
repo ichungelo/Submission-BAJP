@@ -1,6 +1,5 @@
 package com.ichungelo.catfilm.utils
 
-import android.app.Activity
 import android.content.Context
 import android.widget.ImageView
 import android.widget.Toast

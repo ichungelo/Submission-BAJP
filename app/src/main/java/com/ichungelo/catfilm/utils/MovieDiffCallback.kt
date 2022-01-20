@@ -2,7 +2,6 @@ package com.ichungelo.catfilm.utils
 
 import androidx.recyclerview.widget.DiffUtil
 import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
-import com.ichungelo.catfilm.data.source.local.entity.TvEntity
 
 class MovieDiffCallback(
     private val mOldMovieList: List<MovieEntity>,

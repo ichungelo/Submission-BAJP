@@ -60,7 +60,8 @@
         android:src="@drawable/bg_nofavorite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rv_favorite_movies" />
+        app:layout_constraintTop_toTopOf="@+id/rv_favorite_movies"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/tv_bg_favorite_movies"

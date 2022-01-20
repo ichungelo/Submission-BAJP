@@ -4,10 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.ichungelo.catfilm.data.TmdbRepository
-import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
 import com.ichungelo.catfilm.data.source.local.entity.TvEntity
-import com.ichungelo.catfilm.ui.favorite.fragment.tvshows.FavoriteTvShowsViewModel
-import com.ichungelo.catfilm.ui.search.movies.SearchMoviesViewModel
 import com.ichungelo.catfilm.utils.DataDummy
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.*

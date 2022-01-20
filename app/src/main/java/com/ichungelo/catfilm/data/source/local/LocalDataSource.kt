@@ -1,9 +1,7 @@
 package com.ichungelo.catfilm.data.source.local
 
-import androidx.appcompat.widget.DialogTitle
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
-import androidx.sqlite.db.SupportSQLiteQuery
 import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
 import com.ichungelo.catfilm.data.source.local.entity.TvEntity
 import com.ichungelo.catfilm.data.source.local.room.TmdbDao

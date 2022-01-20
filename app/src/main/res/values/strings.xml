@@ -20,8 +20,6 @@
     <string name="dummyweb">www.dummyweb.com</string>
     <string name="backdrop_image">backdrop image</string>
     <string name="favorite">Favorite</string>
-    <string name="movie_category">movie</string>
-    <string name="tv_category">tv</string>
     <string name="favorite_button">favorite button</string>
     <string name="app_logo">app logo</string>
     <string name="go_to_favorites">go to favorites</string>
@@ -30,7 +28,6 @@
     <string name="favorite_movies">Favorite Movies</string>
     <string name="favorite_tv_shows">Favorite Tv Shows</string>
     <string name="dummy_year">2018</string>
-    <string name="sort_button">sort button</string>
     <string name="favorite_movies_hint">Search Favorite Movies..</string>
     <string name="favorite_tv_show_hint">Search Favorite Tv Shows..</string>
     <string name="tv_bg_search">Your search result will appear here</string>

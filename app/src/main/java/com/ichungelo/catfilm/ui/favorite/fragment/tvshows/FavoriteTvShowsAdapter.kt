@@ -6,14 +6,10 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
 import com.ichungelo.catfilm.data.source.local.entity.TvEntity
 import com.ichungelo.catfilm.databinding.ItemsResultBinding
 import com.ichungelo.catfilm.ui.detail.DetailActivity
-import com.ichungelo.catfilm.ui.favorite.fragment.movies.FavoriteMoviesAdapter
 import com.ichungelo.catfilm.utils.Helper
-import com.ichungelo.catfilm.utils.MovieDiffCallback
-import com.ichungelo.catfilm.utils.TvShowDiffCallback
 
 class FavoriteTvShowsAdapter: PagedListAdapter<TvEntity, FavoriteTvShowsAdapter.FavoriteTvShowsViewHolder>(DIFF_CALLBACK) {
 

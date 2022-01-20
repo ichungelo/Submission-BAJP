@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.ichungelo.catfilm.data.TmdbRepository
 import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
-import com.ichungelo.catfilm.ui.favorite.fragment.movies.FavoriteMoviesViewModel
 import com.ichungelo.catfilm.utils.DataDummy
 import com.nhaarman.mockitokotlin2.verify
 import org.junit.Assert.*

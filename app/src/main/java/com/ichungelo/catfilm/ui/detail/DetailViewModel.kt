@@ -1,8 +1,6 @@
 package com.ichungelo.catfilm.ui.detail
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.ichungelo.catfilm.data.source.local.entity.DetailEntity
 import com.ichungelo.catfilm.data.TmdbRepository
 import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
 import com.ichungelo.catfilm.data.source.local.entity.TvEntity
