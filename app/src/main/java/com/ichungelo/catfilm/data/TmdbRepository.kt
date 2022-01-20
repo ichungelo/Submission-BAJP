@@ -155,8 +155,7 @@ class TmdbRepository private constructor(
             .setInitialLoadSizeHint(4)
             .setPageSize(4)
             .build()
-        val query = FavoriteUtil.getSearchMoviesQuery(title)
-        return LivePagedListBuilder(localDataSource.getAllMoviesFavorite(query), config).build()
+        return LivePagedListBuilder(localDataSource.getAllMoviesFavorite(title), config).build()
     }
 
     override fun getAllTvShowsFavorite(title: String): LiveData<PagedList<TvEntity>> {
@@ -165,8 +164,7 @@ class TmdbRepository private constructor(
             .setInitialLoadSizeHint(4)
             .setPageSize(4)
             .build()
-        val query = FavoriteUtil.getSearchTvShowQuery(title)
-        return LivePagedListBuilder(localDataSource.getAllTvShowsFavorite(query), config).build()
+        return LivePagedListBuilder(localDataSource.getAllTvShowsFavorite(title), config).build()
     }
 
     override fun getMovieById(id: String): LiveData<MovieEntity> = localDataSource.getMovieById(id)
