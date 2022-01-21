@@ -42,16 +42,20 @@ class FavoriteMoviesViewModelTest {
     @Test
     fun getAllMoviesFavorite() {
         val dummy = pagedList
-        `when`(dummy.size).thenReturn(3)
+        `when`(dummy.size).thenReturn(10)
         val favoriteMovies = MutableLiveData<PagedList<MovieEntity>>()
         favoriteMovies.value = dummy
 
-        `when`(tmdbRepository.getAllMoviesFavorite("")).thenReturn(favoriteMovies)
-        val movieEntities = viewModel.getAllMoviesFavorite("").value as List<MovieEntity>
-        verify(tmdbRepository).getAllMoviesFavorite("")
+        `when`(tmdbRepository.getAllMoviesFavorite(DUMMY_TITLE)).thenReturn(favoriteMovies)
+        val movieEntities = viewModel.getAllMoviesFavorite(DUMMY_TITLE).value as List<MovieEntity>
+        verify(tmdbRepository).getAllMoviesFavorite(DUMMY_TITLE)
         assertNotNull(movieEntities)
-        assertEquals(3, movieEntities.size)
-        viewModel.getAllMoviesFavorite("").observeForever(movieObserver)
+        assertEquals(10, movieEntities.size)
+        viewModel.getAllMoviesFavorite(DUMMY_TITLE).observeForever(movieObserver)
         verify(movieObserver).onChanged(dummy)
+    }
+
+    companion object {
+        const val DUMMY_TITLE = ""
     }
 }

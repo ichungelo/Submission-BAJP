@@ -8,7 +8,7 @@ import com.ichungelo.catfilm.data.source.local.entity.MovieEntity
 import com.ichungelo.catfilm.data.source.local.entity.TvEntity
 import com.ichungelo.catfilm.data.source.remote.RemoteDataSource
 import com.ichungelo.catfilm.utils.DataDummy
-import com.ichungelo.catfilm.utils.LiveDataTestUtils
+import com.ichungelo.catfilm.utils.LiveDataTestUtil
 import com.ichungelo.catfilm.utils.PagedListUtil
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doAnswer
@@ -39,7 +39,6 @@ class TmdbRepositoryTest {
     private val tvShowById = tvShowLocal[0]
     private val detailMovie = DataDummy.generateRemoteDetailMovie()
     private val detailTvShow = DataDummy.generateRemoteDetailTvShow()
-    private val dummyQuery = "test"
 
     @Test
     fun getMovies() {
@@ -48,10 +47,16 @@ class TmdbRepositoryTest {
                 .onAllMoviesReceived(movieResponses)
             null
         }.`when`(remote).getAllMovies(any())
-        val movieEntities = LiveDataTestUtils.getValue(repository.getMovies())
+        val movieEntities = LiveDataTestUtil.getValue(repository.getMovies())
         verify(remote).getAllMovies(any())
         assertNotNull(movieEntities)
         assertEquals(movieResponses.size.toLong(), movieEntities.size.toLong())
+        for (index in movieEntities.indices) {
+            assertEquals(movieResponses[index].id, movieEntities[index].id)
+            assertEquals(movieResponses[index].title, movieEntities[index].title)
+            assertEquals(movieResponses[index].releaseDate, movieEntities[index].releaseDate)
+            assertEquals(movieResponses[index].posterPath, movieEntities[index].posterPath)
+        }
     }
 
     @Test
@@ -60,10 +65,17 @@ class TmdbRepositoryTest {
             (invocation.arguments[0] as RemoteDataSource.LoadSearchMoviesCallback)
                 .onSearchMoviesReceived(movieResponses)
             null
-        }.`when`(remote).getSearchMovies(any(),eq(dummyQuery))
-        val movieEntities = LiveDataTestUtils.getValue(repository.getSearchMovies(dummyQuery))
-        verify(remote).getSearchMovies(any(), eq(dummyQuery))
+        }.`when`(remote).getSearchMovies(any(),eq(DUMMY_INPUT))
+        val movieEntities = LiveDataTestUtil.getValue(repository.getSearchMovies(DUMMY_INPUT))
+        verify(remote).getSearchMovies(any(), eq(DUMMY_INPUT))
+        assertNotNull(movieEntities)
         assertEquals(movieResponses.size.toLong(), movieEntities.size.toLong())
+        for (index in movieEntities.indices) {
+            assertEquals(movieResponses[index].id, movieEntities[index].id)
+            assertEquals(movieResponses[index].title, movieEntities[index].title)
+            assertEquals(movieResponses[index].releaseDate, movieEntities[index].releaseDate)
+            assertEquals(movieResponses[index].posterPath, movieEntities[index].posterPath)
+        }
     }
 
     @Test
@@ -74,7 +86,7 @@ class TmdbRepositoryTest {
             null
         }.`when`(remote).getDetailMovie(any(), eq(movieId))
 
-        val detailMovie = LiveDataTestUtils.getValue(repository.getDetailMovie(movieId))
+        val detailMovie = LiveDataTestUtil.getValue(repository.getDetailMovie(movieId))
 
         verify(remote).getDetailMovie(any(), eq(movieId))
 
@@ -95,13 +107,19 @@ class TmdbRepositoryTest {
     @Test
     fun getAllMoviesFavorite() {
         val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, MovieEntity>
-        `when`(local.getAllMoviesFavorite("")).thenReturn(dataSourceFactory)
-        repository.getAllMoviesFavorite("")
+        `when`(local.getAllMoviesFavorite(DUMMY_INPUT)).thenReturn(dataSourceFactory)
+        repository.getAllMoviesFavorite(DUMMY_INPUT)
 
         val movieEntities = PagedListUtil.mockPagedList(DataDummy.generateDataMovies())
-        verify(local).getAllMoviesFavorite("")
+        verify(local).getAllMoviesFavorite(DUMMY_INPUT)
         assertNotNull(movieEntities)
         assertEquals(movieLocal.size.toLong(), movieEntities.size.toLong())
+        for (index in movieEntities.indices) {
+            assertEquals(movieLocal[index].id, movieEntities[index]?.id)
+            assertEquals(movieLocal[index].title, movieEntities[index]?.title)
+            assertEquals(movieLocal[index].releaseDate, movieEntities[index]?.releaseDate)
+            assertEquals(movieLocal[index].posterPath, movieEntities[index]?.posterPath)
+        }
     }
 
     @Test
@@ -110,10 +128,13 @@ class TmdbRepositoryTest {
         movie.value = movieById
 
         `when`(local.getMovieById(eq(movieId))).thenReturn(movie)
-        val movieEntity = LiveDataTestUtils.getValue(repository.getMovieById(eq(movieId)))
+        val movieEntity = LiveDataTestUtil.getValue(repository.getMovieById(eq(movieId)))
         verify(local).getMovieById(eq(movieId))
         assertNotNull(movieEntity)
-        assertEquals(movieEntity.id.toString(), movieId)
+        assertEquals(movieEntity.id, movieLocal[0].id)
+        assertEquals(movieEntity.title, movieLocal[0].title)
+        assertEquals(movieEntity.releaseDate, movieLocal[0].releaseDate)
+        assertEquals(movieEntity.posterPath, movieLocal[0].posterPath)
     }
 
     @Test
@@ -123,10 +144,16 @@ class TmdbRepositoryTest {
                 .onAllTvShowsReceived(tvResponses)
             null
         }.`when`(remote).getAllTvShows(any())
-        val tvShowEntities = LiveDataTestUtils.getValue(repository.getTvShows())
+        val tvShowEntities = LiveDataTestUtil.getValue(repository.getTvShows())
         verify(remote).getAllTvShows(any())
         assertNotNull(tvShowEntities)
         assertEquals(tvResponses.size.toLong(), tvShowEntities.size.toLong())
+        for (index in tvShowEntities.indices) {
+            assertEquals(tvResponses[index].id, tvShowEntities[index].id)
+            assertEquals(tvResponses[index].title, tvShowEntities[index].title)
+            assertEquals(tvResponses[index].releaseDate, tvShowEntities[index].releaseDate)
+            assertEquals(tvResponses[index].posterPath, tvShowEntities[index].posterPath)
+        }
     }
 
     @Test
@@ -135,10 +162,17 @@ class TmdbRepositoryTest {
             (invocation.arguments[0] as RemoteDataSource.LoadSearchTvShowsCallback)
                 .onSearchTvShowsReceived(tvResponses)
             null
-        }.`when`(remote).getSearchTvShows(any(),eq(dummyQuery))
-        val tvEntities = LiveDataTestUtils.getValue(repository.getSearchTvShows(dummyQuery))
-        verify(remote).getSearchTvShows(any(), eq(dummyQuery))
+        }.`when`(remote).getSearchTvShows(any(),eq(DUMMY_INPUT))
+        val tvEntities = LiveDataTestUtil.getValue(repository.getSearchTvShows(DUMMY_INPUT))
+        verify(remote).getSearchTvShows(any(), eq(DUMMY_INPUT))
+        assertNotNull(tvEntities)
         assertEquals(tvResponses.size.toLong(), tvEntities.size.toLong())
+        for (index in tvEntities.indices) {
+            assertEquals(tvResponses[index].id, tvEntities[index].id)
+            assertEquals(tvResponses[index].title, tvEntities[index].title)
+            assertEquals(tvResponses[index].releaseDate, tvEntities[index].releaseDate)
+            assertEquals(tvResponses[index].posterPath, tvEntities[index].posterPath)
+        }
     }
 
     @Test
@@ -149,7 +183,7 @@ class TmdbRepositoryTest {
             null
         }.`when`(remote).getDetailTvShow(any(), eq(tvShowId))
 
-        val detailTvShow = LiveDataTestUtils.getValue(repository.getDetailTvShow(tvShowId))
+        val detailTvShow = LiveDataTestUtil.getValue(repository.getDetailTvShow(tvShowId))
 
         verify(remote).getDetailTvShow(any(), eq(tvShowId))
 
@@ -170,13 +204,19 @@ class TmdbRepositoryTest {
     @Test
     fun getAllTvShowsFavorite() {
         val dataSourceFactory = mock(DataSource.Factory::class.java) as DataSource.Factory<Int, TvEntity>
-        `when`(local.getAllTvShowsFavorite("")).thenReturn(dataSourceFactory)
-        repository.getAllTvShowsFavorite("")
+        `when`(local.getAllTvShowsFavorite(DUMMY_INPUT)).thenReturn(dataSourceFactory)
+        repository.getAllTvShowsFavorite(DUMMY_INPUT)
 
         val tvEntities = PagedListUtil.mockPagedList(DataDummy.generateDataTvShows())
-        verify(local).getAllTvShowsFavorite("")
+        verify(local).getAllTvShowsFavorite(DUMMY_INPUT)
         assertNotNull(tvEntities)
         assertEquals(tvShowLocal.size.toLong(), tvEntities.size.toLong())
+        for (index in tvEntities.indices) {
+            assertEquals(tvResponses[index].id, tvEntities[index]?.id)
+            assertEquals(tvResponses[index].title, tvEntities[index]?.title)
+            assertEquals(tvResponses[index].releaseDate, tvEntities[index]?.releaseDate)
+            assertEquals(tvResponses[index].posterPath, tvEntities[index]?.posterPath)
+        }
     }
 
     @Test
@@ -185,9 +225,17 @@ class TmdbRepositoryTest {
         tvShow.value = tvShowById
 
         `when`(local.getTvById(eq(tvShowId))).thenReturn(tvShow)
-        val tvEntity = LiveDataTestUtils.getValue(repository.getTvById(eq(tvShowId)))
+        val tvEntity = LiveDataTestUtil.getValue(repository.getTvById(eq(tvShowId)))
         verify(local).getTvById(eq(tvShowId))
         assertNotNull(tvEntity)
         assertEquals(tvEntity.id.toString(), tvShowId)
+        assertEquals(tvEntity.id, tvShowLocal[0].id)
+        assertEquals(tvEntity.title, tvShowLocal[0].title)
+        assertEquals(tvEntity.releaseDate, tvShowLocal[0].releaseDate)
+        assertEquals(tvEntity.posterPath, tvShowLocal[0].posterPath)
+    }
+
+    companion object {
+        const val DUMMY_INPUT = ""
     }
 }

@@ -2,7 +2,7 @@ package com.ichungelo.catfilm.utils
 
 import androidx.sqlite.db.SimpleSQLiteQuery
 
-object FavoriteUtil {
+object FavoriteSearchUtil {
     fun getSearchMoviesQuery(title: String?): SimpleSQLiteQuery {
         val query = StringBuilder().append("SELECT * FROM movie_favorite $title")
         return SimpleSQLiteQuery(query.toString())

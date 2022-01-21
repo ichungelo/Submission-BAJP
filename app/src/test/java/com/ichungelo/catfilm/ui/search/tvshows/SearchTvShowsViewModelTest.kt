@@ -38,12 +38,11 @@ class SearchTvShowsViewModelTest {
     @Test
     fun getSearchTvShows() {
         val favoriteTvShows = MutableLiveData<List<TvEntity>>()
-        val query = "TEST"
         favoriteTvShows.value = dummyTvShows
 
-        Mockito.`when`(tmdbRepository.getSearchTvShows(query)).thenReturn(favoriteTvShows)
-        val tvEntities = viewModel.getSearchTvShows(query).value as List<TvEntity>
-        Mockito.verify(tmdbRepository).getSearchTvShows(query)
+        Mockito.`when`(tmdbRepository.getSearchTvShows(DUMMY_INPUT)).thenReturn(favoriteTvShows)
+        val tvEntities = viewModel.getSearchTvShows(DUMMY_INPUT).value as List<TvEntity>
+        Mockito.verify(tmdbRepository).getSearchTvShows(DUMMY_INPUT)
         assertNotNull(tvEntities)
         for (index in tvEntities.indices) {
             assertNotNull(tvEntities[index])
@@ -55,7 +54,11 @@ class SearchTvShowsViewModelTest {
             assertEquals(tvEntities[index].title, dummyTvShows[index].title)
             assertEquals(tvEntities[index].posterPath, dummyTvShows[index].posterPath)
         }
-        viewModel.getSearchTvShows(query).observeForever(tvShowObserver)
+        viewModel.getSearchTvShows(DUMMY_INPUT).observeForever(tvShowObserver)
         verify(tvShowObserver).onChanged(dummyTvShows)
+    }
+
+    companion object {
+        const val DUMMY_INPUT = ""
     }
 }

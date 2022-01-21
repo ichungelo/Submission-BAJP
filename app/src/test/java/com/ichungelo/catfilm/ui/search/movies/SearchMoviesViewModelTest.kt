@@ -38,12 +38,11 @@ class SearchMoviesViewModelTest {
     @Test
     fun getSearchMovies() {
         val favoriteMovies = MutableLiveData<List<MovieEntity>>()
-        val query = "TEST"
         favoriteMovies.value = dummyMovies
 
-        Mockito.`when`(tmdbRepository.getSearchMovies(query)).thenReturn(favoriteMovies)
-        val movieEntities = viewModel.getSearchMovies(query).value as List<MovieEntity>
-        Mockito.verify(tmdbRepository).getSearchMovies(query)
+        Mockito.`when`(tmdbRepository.getSearchMovies(DUMMY_INPUT)).thenReturn(favoriteMovies)
+        val movieEntities = viewModel.getSearchMovies(DUMMY_INPUT).value as List<MovieEntity>
+        Mockito.verify(tmdbRepository).getSearchMovies(DUMMY_INPUT)
         assertNotNull(movieEntities)
         for (index in movieEntities.indices) {
             assertNotNull(movieEntities[index])
@@ -55,7 +54,11 @@ class SearchMoviesViewModelTest {
             assertEquals(movieEntities[index].title, dummyMovies[index].title)
             assertEquals(movieEntities[index].posterPath, dummyMovies[index].posterPath)
         }
-        viewModel.getSearchMovies(query).observeForever(movieObserver)
+        viewModel.getSearchMovies(DUMMY_INPUT).observeForever(movieObserver)
         verify(movieObserver).onChanged(dummyMovies)
+    }
+
+    companion object {
+        const val DUMMY_INPUT = ""
     }
 }
